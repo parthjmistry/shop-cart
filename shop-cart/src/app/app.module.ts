@@ -23,6 +23,7 @@ import { SignUpComponent } from './User/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
 import { UserListComponent } from './User/user-list/user-list.component';
 import { UserDetailsComponent } from './User/user-details/user-details.component';
+import { HomePageComponent } from './Components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UserDetailsComponent } from './User/user-details/user-details.component
     ResetPasswordComponent,
     UserListComponent,
     UserDetailsComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
