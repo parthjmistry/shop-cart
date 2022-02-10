@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Shared/Components/header/header.component';
@@ -27,7 +26,9 @@ import { HomePageComponent } from './Components/home-page/home-page.component';
 import { NewArrivalsProductsComponent } from './Components/new-arrivals-products/new-arrivals-products.component';
 import { CartComponent } from './Cart/cart/cart.component';
 import { CheckoutComponent } from './Checkout/checkout/checkout.component';
-
+//import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -59,9 +60,12 @@ import { CheckoutComponent } from './Checkout/checkout/checkout.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
