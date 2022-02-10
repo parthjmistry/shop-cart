@@ -9,3 +9,34 @@
 @import url(assets/css/core-style.css);
 @import url(assets/css/responsive.css);
 
+.login-wrapper {
+  width: 100%;
+  border: 2px solid #ebebeb;
+  padding: 40px;
+}
+.login-wrapper form div{
+  position: relative;
+}
+.login-page-heading {
+  margin-bottom:30px;
+}
+.login-page-heading h5{
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.login-page-heading p {
+  color: #7a7a7a;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+form .form-control{
+  height: 52px;
+  border: none;
+  background-color: #f4f2f8;
+  border-radius: 0;
+}
+.showhidepass {
+  position: absolute;
+  top: 45px;
+  right:20px;
+}
