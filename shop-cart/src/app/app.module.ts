@@ -24,6 +24,10 @@ import { ResetPasswordComponent } from './User/reset-password/reset-password.com
 import { UserListComponent } from './User/user-list/user-list.component';
 import { UserDetailsComponent } from './User/user-details/user-details.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
+import { NewArrivalsProductsComponent } from './Components/new-arrivals-products/new-arrivals-products.component';
+import { CartComponent } from './Cart/cart/cart.component';
+import { CheckoutComponent } from './Checkout/checkout/checkout.component';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +53,9 @@ import { HomePageComponent } from './Components/home-page/home-page.component';
     UserListComponent,
     UserDetailsComponent,
     HomePageComponent,
+    NewArrivalsProductsComponent,
+    CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
