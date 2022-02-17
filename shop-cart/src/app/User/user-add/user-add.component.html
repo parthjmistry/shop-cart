@@ -1,0 +1,53 @@
+<div class="login_area section_padding_10">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12 ml-md-auto mr-md-auto">
+        <div class="login-popup-wrapper">
+          <div class="modal-header">
+            <h5>Add User</h5>
+          </div>
+        <form [formGroup]="userAdd" (ngSubmit)="FormSubmit()" >
+            <div class="modal-body">
+            <div class="form-group">
+                <input type="text"  name="firstName" formControlName="firstName" placeholder="First Name" class = "form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required>
+            </div>
+            <div class="form-group">
+                <input type="text"  name="lastName" formControlName="lastName" placeholder="Last Name" class = "form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" formControlName="email" placeholder="Email" class = "form-control" [pattern]="emailPattern" 
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
+            </div>
+            <div class="form-group">
+                <input type="password"  name="password" formControlName="password" placeholder="Password" class = "form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+                    <div *ngIf="f.password.errors.minlength">
+                    </div>
+            </div>
+            <div class="form-group">
+                <input type="password"  name="confPassword" formControlName="confPassword" placeholder="Confirm Password" class = "form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }" required>
+                    <div *ngIf="f.confPassword.errors.mustMatch"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="phoneNo" formControlName="phoneNo" placeholder="Phone Number" class = "form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }" required>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <div class="text-left">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary" (click)="onCancel()">Close</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary" (click)="onReset()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>

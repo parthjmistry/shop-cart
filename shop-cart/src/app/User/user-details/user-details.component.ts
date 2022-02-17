@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { UserViewModel } from 'src/app/Model/user-view-model';
+import { UserService } from 'src/app/Service/user.service';
 
 @Component({
   selector: 'app-user-details',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-
-  constructor() { }
+  userList : UserViewModel[] =[];
+  detail : any = {};
+  usersData: any;
+  constructor(private userService : UserService) {}
 
   ngOnInit(): void {
+    const userObservable = this.userService.getUsers();
+        userObservable.subscribe((userList: UserViewModel[]) => {
+          this.detail = userList.find(t => t.Email == localStorage.getItem('loggedUser'));
+        });
+        console.log(this.detail)
   }
-
 }

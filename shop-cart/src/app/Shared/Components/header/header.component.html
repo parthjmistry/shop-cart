@@ -4,8 +4,20 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-end">
 
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-lg-12">
                     <div class="top_single_area d-flex align-items-center">
+                        <div class="header-cart-menu d-flex align-items-center mr-auto">
+                            <!-- Cart Area -->
+                            <div class="header-right-side-menu mr-15" *ngIf="!logged">
+                                <a [routerLink]="['/login']" ><i class="ti-user" aria-hidden="true"></i></a> 
+                                <!-- login -->
+                            </div>
+                            <div class="header-right-side-menu mr-15" *ngIf="logged">
+                                <a [routerLink]="['/login']" (click)="btnLogout()" ><i class="ti-shift-right" aria-hidden="true"></i></a>
+                                <!-- logout -->
+                            </div>
+                            <a>{{userName}}</a>
+                        </div>
                         <!-- Logo Area -->
                         <div class="top_logo">
                             <a [routerLink]="['/']"><img src="../../../../assets/img/core-img/logo.png" alt=""></a>
@@ -37,11 +49,9 @@
                                         <span class="pull-right">Total: $20.00</span>
                                         <a [routerLink]="['/cart']" class="btn btn-sm btn-cart">Cart</a>
                                         <a [routerLink]="['/checkout']" class="btn btn-sm btn-checkout">Checkout</a>
+                                       
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="header-right-side-menu ml-15">
-                                <a [routerLink]="['/login']" ><i class="ti-user" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>

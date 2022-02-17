@@ -29,6 +29,8 @@ import { CheckoutComponent } from './Checkout/checkout/checkout.component';
 //import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserAddComponent } from './User/user-add/user-add.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -57,12 +59,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewArrivalsProductsComponent,
     CartComponent,
     CheckoutComponent,
+    UserAddComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [
   ],

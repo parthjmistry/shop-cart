@@ -40,3 +40,60 @@ form .form-control{
   top: 45px;
   right:20px;
 }
+.navbar-expand-lg .navbar-nav .nav-link{
+  color: #000000;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover{
+  color: #ff084e;
+}
+.user-profile{
+	margin: auto;
+	max-width: 420px;
+	text-align: center;
+	border: 2px solid #ebebeb;
+	border-radius: 0;
+}
+.profile-header{
+  padding-top:200px;
+  position:relative;
+  overflow:hidden;
+}
+.profile-header:before{
+  background: #ff084e;
+  content: "";
+  height: 600px;
+  width: 600px;
+  border-radius: 600px;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.profile-details{
+  padding:30px;
+}
+.profile-pic{
+  height:180px;
+  width:180px;
+  border-radius:180px;
+  overflow:hidden;
+  margin:-120px auto 30px;
+}
+.profile-details ul{
+  margin-top:15px;
+}
+.profile-details ul li{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.profile-details ul li i{
+  font-size:24px;
+  color:#ff084e;
+  margin-right:10px;
+}
+.profile-details ul li + li{
+  margin-top:15px;
+}

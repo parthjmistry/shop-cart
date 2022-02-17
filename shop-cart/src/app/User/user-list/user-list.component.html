@@ -1,1 +1,54 @@
-<p>user-list works!</p>
+
+<!-- <table>
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Email</td>
+        <td>Phone Number</td>
+    </tr>
+    <tr *ngFor="let userItem of UserList">
+        <td>{{userItem.FirstName}}</td>
+        <td>{{userItem.LastName}}</td>
+        <td>{{userItem.Email}}</td>
+        <td>{{userItem.PhoneNo}}</td>
+    </tr>
+</table> -->
+
+<div class="section_padding_100">
+    <!-- <div class="help-line">
+        <a class="help-line a"> Add User</a>
+    </div> -->
+    
+    <div class="container">
+    <div class="mb-4 row">
+        <div class="col-md-12 d-md-flex  align-items-center justify-content-between">
+            <h2>Users List</h2>
+            <button class="btn cart-submit d-block" (click)="OpenModalAddUser()">Add User</button>
+        </div>
+    </div>
+        
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userItem of UserList">
+                <td>{{userItem.FirstName}}</td>
+                <td>{{userItem.LastName}}</td>
+                <td>{{userItem.Email}}</td>
+                <td>{{userItem.PhoneNo}}</td>
+                <td>10-02-1990</td>
+                <td><i class="ti-pencil" aria-hidden="true"></i> &nbsp; &nbsp;<i class="ti-trash" aria-hidden="true"></i></td>
+            </tr>
+    
+          </tbody>
+      </table>
+    </div>
+    </div>

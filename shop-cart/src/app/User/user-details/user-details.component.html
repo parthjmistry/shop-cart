@@ -1,1 +1,40 @@
-<p>user-details works!</p>
+<!-- <div class="section_padding_100">
+    <div class="container">
+        <table class="table">
+            <tr>
+                <td>First Name : </td>
+                <td>{{detail.FirstName}}</td>
+            </tr>
+            <tr>
+                <td>Last Name : </td>
+                <td>{{detail.LastName}}</td>
+            </tr>
+            <tr>
+                <td>Email : </td>
+                <td>{{detail.Email}}</td>
+            </tr>
+            <tr>
+                <td>Phone Number : </td>
+                <td>{{detail.PhoneNo}}</td>
+            </tr>
+        </table>
+    </div>
+</div> -->
+<div class="section_padding_100">
+    <div class="container">
+        <div class="user-profile">
+            <div class="profile-header">
+            </div>
+            <div class="profile-details">
+              <div class="profile-pic">
+                  <img src="https://picsum.photos/200" />
+              </div>
+              <h3>{{detail.FirstName}} {{detail.LastName}}</h3>
+              <ul>
+                <li><i class="ti-email"></i> {{detail.Email}}</li>
+                <li><i class="ti-mobile "></i> {{detail.PhoneNo}}</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+  </div>
