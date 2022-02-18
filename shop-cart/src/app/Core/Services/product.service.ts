@@ -31,4 +31,10 @@ export class ProductService {
       map((data) => data.filter((res) => res.category === category))
     );
   }
+
+  getProuductById(pid: number) {
+    return this.getProductData().pipe(
+      map((data) => data.filter((res) => res.id === pid))
+    );
+  }
 }

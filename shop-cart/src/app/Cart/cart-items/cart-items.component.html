@@ -9,23 +9,22 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let cartItem of Products">
+        <tr *ngFor="let cartItem of CartItemNew">
         <td class="cart_product_img d-flex align-items-center">
-          <a href="#"
-            ><img
-              src="../../../../assets/img/product-img/product-9.jpg"
-              alt="Product"
+          <a href="#"><img
+            [src]="baseUrl + 'assets/img/product-img/' + cartItem.img"
+            [alt]="cartItem.name"
           /></a>
-          <h6>{{ cartItem.Name }}</h6>
+          <h6>{{ cartItem.name }}</h6>
         </td>
         <td class="price">
-          <span>${{ cartItem.Price }}</span>
+          <span>${{ cartItem.price }}</span>
         </td>
         <td class="qty">
           <div class="quantity">
             <span
               class="qty-minus border"
-              (click)="EditItem('Remove', cartItem.Id)"
+              (click)="EditItem('Remove', cartItem.id)"
               ><i class="fa fa-minus" aria-hidden="true"></i
             ></span>
             <input
@@ -35,13 +34,13 @@
               name="quantity"
               value="{{ cartItem.Qty }}"
             />
-            <span class="qty-plus border" (click)="EditItem('Add', cartItem.Id)"
+            <span class="qty-plus border" (click)="EditItem('Add', cartItem.id)"
               ><i class="fa fa-plus" aria-hidden="true"></i
             ></span>
           </div>
         </td>
         <td class="total_price">
-          <span>${{ cartItem.Amount }}</span>
+          <span>${{ cartItem.price * cartItem.Qty }}</span>
         </td>
       </tr>
     </tbody>
@@ -52,8 +51,8 @@
   <div class="back-to-shop w-50">
     <a [routerLink]="['../shop']">Continue shooping</a>
   </div>
-  <div class="update-checkout w-50 text-right">
+  <!-- <div class="update-checkout w-50 text-right">
     <a (click)="ClearCart()">clear cart</a>
     <a (click)="AddToCart()">Add to cart</a>
-  </div>
+  </div> -->
 </div>

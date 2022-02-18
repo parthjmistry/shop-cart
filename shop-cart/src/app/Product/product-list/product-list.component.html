@@ -33,7 +33,7 @@
                           <p [innerText]="product.name"></p>
         
                           <!-- Add to Cart -->
-                          <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+                          <a href="javascript:void(0);" class="add-to-cart-btn" (click) = "addToCart(product.id)">ADD TO CART</a>
                         </div>
                       </div>
                     </div>
