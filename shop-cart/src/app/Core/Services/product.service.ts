@@ -40,6 +40,10 @@ export class ProductService {
   getProuductByColor(color: string) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.color === color))
+    );}
+  getProuductById(pid: number) {
+    return this.getProductData().pipe(
+      map((data) => data.filter((res) => res.id === pid))
     );
   }
 }
