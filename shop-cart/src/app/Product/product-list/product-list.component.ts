@@ -78,6 +78,7 @@ export class ProductListComponent implements OnInit {
       }
 
       localStorage.setItem('cartItem', JSON.stringify(this.cartData));
+      alert(data[0].name + ' added in cart.');
     });
   }
 }

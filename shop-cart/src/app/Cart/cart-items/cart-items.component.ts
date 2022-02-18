@@ -17,7 +17,6 @@ export class CartItemsComponent implements OnInit {
   NewProduct: CartModel = new CartModel();
   Cart: CartModel[] = [];
   CartItemNew: CartModelNew[] = [];
-  
 
   constructor(
     private router: Router,
@@ -31,7 +30,6 @@ export class CartItemsComponent implements OnInit {
       console.log(res);
     });
 
-    //console.log(JSON.parse(localStorage.getItem('cartItem') || '{}'));
     this.CartItemNew = JSON.parse(localStorage.getItem('cartItem') || '{}');
   }
 
@@ -41,21 +39,25 @@ export class CartItemsComponent implements OnInit {
 
   EditItem(Action: string, ProdutId: number) {
     if (Action === 'Add') {
-      this.CartItemNew.filter( (List) => List.id === ProdutId).map(
-        (List) => ( List.Qty += 1)
+      this.CartItemNew.filter((List) => List.id === ProdutId).map(
+        (List) => (List.Qty += 1)
       );
-
     } else {
-      // this.Products.filter((List) => List.Id === ProdutId).map(
-      //   (List) => (
-      //     List.Qty == 0 ? 0 : (List.Qty -= 1),
-      //     (List.Amount = List.Price * List.Qty)
-      //   )
-      // );
-
-      this.CartItemNew.filter( (List) => List.id === ProdutId).map(
-        (List) => ( (List.Qty > 1) ? (List.Qty -= 1 ) : 1)
+      this.CartItemNew.filter((List) => List.id === ProdutId).map((List) =>
+        List.Qty > 1 ? (List.Qty -= 1) : 1
       );
+    }
+  }
+
+  deleteCartItem(itemId: number) {
+    if (confirm('Are you sure you want to delete item from cart?')) {
+      const currentArray = this.CartItemNew;
+      for (let i = 0; i < currentArray.length; ++i) {
+        if (currentArray[i].id === itemId) {
+          currentArray.splice(i, 1);
+        }
+      }
+      localStorage.setItem('cartItem', JSON.stringify(currentArray));
     }
   }
 
