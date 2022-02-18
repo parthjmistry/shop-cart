@@ -47,6 +47,8 @@ export class CartItemsComponent implements OnInit {
         List.Qty > 1 ? (List.Qty -= 1) : 1
       );
     }
+
+    localStorage.setItem('cartItem', JSON.stringify(this.CartItemNew));
   }
 
   deleteCartItem(itemId: number) {
