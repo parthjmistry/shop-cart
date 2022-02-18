@@ -8,11 +8,13 @@ import { ProductService } from 'src/app/Core/Services/product.service';
 })
 export class SidebarComponent implements OnInit {
   categoryList: string[] = [];
+  colorList: string[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.getCategoryList();
+    this.getColorList();
     //this.productService.categoryName.next('');
   }
 
@@ -23,12 +25,24 @@ export class SidebarComponent implements OnInit {
     });
   }
 
+  getColorList() {
+    this.productService.getProductColors().subscribe((data) => {
+      //console.log(data);
+      this.colorList = data;
+    });
+  }
+
   getProductByCategory(categoryName: string) {
     this.productService.categoryName.next(categoryName);
   }
+  getProductByColor(colorName: string) {
+    this.productService.colorName.next(colorName);
+  }
+  
 
   ngOnDestroy(): void {
     // reset subject
     this.productService.categoryName.next('');
+    this.productService.colorName.next('');
   }
 }

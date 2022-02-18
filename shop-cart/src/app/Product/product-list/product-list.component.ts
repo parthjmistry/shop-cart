@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ProductListComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
   categoryName: string = '';
+  colorName: string = '';
   productList: Product[] = [];
 
   //categoryName: string;
@@ -27,6 +28,17 @@ export class ProductListComponent implements OnInit {
         this.getProductList();
       } else {
         this.getProuductByCategory(res);
+      }
+    });
+    this.productService.colorName.subscribe((res: string) => {
+      this.colorName = res;
+
+     // console.log(res);
+
+      if (!this.colorName) {
+        this.getProductList();
+      } else {
+        this.getProuductByColor(res);
       }
     });
   }
@@ -45,6 +57,12 @@ export class ProductListComponent implements OnInit {
 
   getProuductByCategory(category: string) {
     this.productService.getProuductByCategory(category).subscribe((data) => {
+      //console.log(data);
+      this.productList = data;
+    });
+  }
+  getProuductByColor(color: string) {
+    this.productService.getProuductByColor(color).subscribe((data) => {
       //console.log(data);
       this.productList = data;
     });

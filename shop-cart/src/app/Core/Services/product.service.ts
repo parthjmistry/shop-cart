@@ -11,6 +11,7 @@ import { Product } from '../Models/ProductModel';
 export class ProductService {
   
   categoryName = new BehaviorSubject<string>('');
+  colorName = new BehaviorSubject<string>('');
   jsonfilePath = 'assets/products.json';
 
   constructor(private http: HttpClient) { }
@@ -29,6 +30,16 @@ export class ProductService {
   getProuductByCategory(category: string) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.category === category))
+    );
+  }
+  getProductColors() {
+    return this.getProductData().pipe(
+      map((data) => [...new Set(data.map((obj) => obj.color))])
+    );
+  }
+  getProuductByColor(color: string) {
+    return this.getProductData().pipe(
+      map((data) => data.filter((res) => res.color === color))
     );
   }
 }
