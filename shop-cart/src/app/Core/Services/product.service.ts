@@ -9,22 +9,53 @@ import { Product } from '../Models/ProductModel';
   providedIn: 'root',
 })
 export class ProductService {
-  
+
   categoryName = new BehaviorSubject<string>('');
   colorName = new BehaviorSubject<string>('');
   jsonfilePath = 'assets/products.json';
+  //jsonfilePath = 'https://angshopcart-default-rtdb.firebaseio.com/products.json'
+
+  productList: Product[] = [];
+  categoryList: string[] = [];
+  colorList: string[] = [];
 
   constructor(private http: HttpClient) { }
-  
-   
+
   getProductData(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.jsonfilePath);
+    return this.http.get<Product[]>(this.jsonfilePath)
   }
+
+
+  // getProductData(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(this.jsonfilePath)
+  //     .pipe(
+  //       map((data) => {
+  //         this.categoryList = [...new Set(data.map((obj) => obj.category))]
+  //         this.colorList = [...new Set(data.map((obj) => obj.color))]
+
+  //         return data;
+  //       })
+  //     )
+  // }
 
   getProductCategories() {
     return this.getProductData().pipe(
       map((data) => [...new Set(data.map((obj) => obj.category))])
     );
+
+    // if (this.categoryList.length > 0) {
+    //   return this.categoryList;
+    // }
+    // else {
+
+    //   this.getProductData().pipe(
+    //     map(data => {
+    //       this.categoryList = [...new Set(data.map((obj) => obj.category))]
+    //     })
+    //   );
+
+    //   return this.categoryList;
+    // }
   }
 
   getProuductByCategory(category: string) {
@@ -40,7 +71,8 @@ export class ProductService {
   getProuductByColor(color: string) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.color === color))
-    );}
+    );
+  }
   getProuductById(pid: number) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.id === pid))
