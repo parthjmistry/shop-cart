@@ -43,8 +43,8 @@ export class CartItemsComponent implements OnInit {
         (List) => (List.Qty += 1)
       );
     } else {
-      this.CartItemNew.filter((List) => List.id === ProdutId).map((List) =>
-        List.Qty > 1 ? (List.Qty -= 1) : 1
+      this.CartItemNew.filter((List) => List.id === ProdutId).map(
+        (List) => List.Qty > 1 ? (List.Qty -= 1) : 1
       );
     }
 
