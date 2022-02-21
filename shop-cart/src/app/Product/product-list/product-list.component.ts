@@ -29,33 +29,25 @@ export class ProductListComponent implements OnInit {
     // subscribe category name from subject
     this.productService.categoryName.subscribe((res: string) => {
       this.categoryName = res;
-
-      // console.log(res);
-
-      if (!this.categoryName) {
-        this.getProductList();
-      } else {
+      if (res != '') {
         this.getProuductByCategory(res);
       }
     });
+
     this.productService.colorName.subscribe((res: string) => {
       this.colorName = res;
-
-     // console.log(res);
-
-      if (!this.colorName) {
-        this.getProductList();
-      } else {
+      // console.log(res);
+      if (res != '') {
         this.getProuductByColor(res);
       }
     });
+
+    if (!this.categoryName && !this.colorName) {
+      this.getProductList();
+    }
   }
 
-  ngOnInit(): void {
-    // reset subject
-    //this.productService.categoryName.next('');
-    //this.cartData =  JSON.parse(localStorage.getItem('cartItem') || '{}');
-  }
+  ngOnInit(): void {}
 
   getProductList() {
     this.productService.getProductData().subscribe((data) => {
@@ -65,10 +57,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getProuductByCategory(category: string) {
-    this.productService.getProuductByCategory(category).subscribe((data) => {
-      //console.log(data);
-      this.productList = data;
-    });
+    this.productService
+      .getProuductByCategory(this.categoryName)
+      .subscribe((data) => {
+        //console.log(data);
+        this.productList = data;
+      });
   }
   getProuductByColor(color: string) {
     this.productService.getProuductByColor(color).subscribe((data) => {
@@ -77,19 +71,15 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  // ngOnDestroy(): void {
-  //   // reset subject
-  //   this.productService.categoryName.next('');
-  // }
-
   addToCart(pid: number) {
     this.productService.getProuductById(pid).subscribe((data) => {
       const itemId = data[0].id;
-      const isItemexits = this.cartData?.filter((res: any) => res.id === itemId);
+      const isItemexits = this.cartData?.filter(
+        (res: any) => res.id === itemId
+      );
 
       if (isItemexits.length > 0) {
         this.cartData.filter((res: any) => res.id === itemId)[0].Qty += 1;
-
       } else {
         this.cartData.push(data[0]);
         this.cartData.filter((res: any) => res.id === itemId)[0].Qty = 1;

@@ -15,26 +15,28 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategoryList();
-    this.getColorList();
-    //this.productService.categoryName.next('');
-  }
 
-  getCategoryList() {
-    this.productService.getProductCategories().subscribe((data) => {
-      //console.log(data);
-      this.categoryList = data;
+    this.productService.categoryList.subscribe((res) => {
+      this.categoryList = res;
     });
 
-     
-  }
-
-  getColorList() {
-    this.productService.getProductColors().subscribe((data) => {
-      //console.log(data);
-      this.colorList = data;
+    this.productService.colorList.subscribe((res) => {
+      this.colorList = res;
     });
   }
+
+  // getCategoryList() {
+  //   this.productService.getProductCategories().subscribe((data) => {
+  //     //console.log(data);
+  //     this.categoryList = data;
+  //   });
+  // }
+
+  // getColorList() {
+  //   this.productService.getProductColors().subscribe((data) => {
+  //     this.colorList = data;
+  //   });
+  // }
 
   getProductByCategory(categoryName: string) {
     this.productService.categoryName.next(categoryName);
@@ -48,5 +50,8 @@ export class SidebarComponent implements OnInit {
     // reset subject
     this.productService.categoryName.next('');
     this.productService.colorName.next('');
+
+    this.productService.categoryList.next([]);
+    this.productService.colorList.next([]);
   }
 }
