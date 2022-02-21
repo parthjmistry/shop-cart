@@ -32,6 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserAddComponent } from './User/user-add/user-add.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
+import { AddproductComponent } from './Admin/addproduct/addproduct.component';
+import { ListproductComponent } from './Admin/listproduct/listproduct.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
     CartComponent,
     CheckoutComponent,
     UserAddComponent,
+    AddproductComponent,
+    ListproductComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddproductComponent } from './Admin/addproduct/addproduct.component';
+import { ListproductComponent } from './Admin/listproduct/listproduct.component';
 import { CartComponent } from './Cart/cart/cart.component';
 import { CheckoutComponent } from './Checkout/checkout/checkout.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'user-add', component: UserAddComponent },
 
+  { path: 'admin/list-product', component: ListproductComponent },
+  { path: 'admin/add-product', component: AddproductComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

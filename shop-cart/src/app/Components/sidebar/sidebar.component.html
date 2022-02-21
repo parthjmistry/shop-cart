@@ -23,6 +23,22 @@
     </div>
   </div>
 
+  <div class="widget color mb-70">
+    <h6 class="widget-title mb-30">Filter by Color</h6>
+    <div class="widget-desc">
+      <ul class="d-flex justify-content-between">
+
+        <li
+            *ngFor="let color of colorList">
+             
+            <a [ngStyle]="{ 'background-color': color }"
+              href="javascript:void(0);" (click)="getProductByColor(color)"
+            ></a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="widget price mb-50">
     <h6 class="widget-title mb-30">Filter by Price</h6>
     <div class="widget-desc">
@@ -51,32 +67,6 @@
     </div>
   </div>
 
-  <div class="widget color mb-70">
-    <h6 class="widget-title mb-30">Filter by Color</h6>
-    <div class="widget-desc">
-      <ul class="d-flex justify-content-between">
-        <li class="gray">
-          <a href="#"><span>(3)</span></a>
-        </li>
-        <li class="red">
-          <a href="#"><span>(25)</span></a>
-        </li>
-        <li class="yellow">
-          <a href="#"><span>(112)</span></a>
-        </li>
-        <li class="green">
-          <a href="#"><span>(72)</span></a>
-        </li>
-        <li class="teal">
-          <a href="#"><span>(9)</span></a>
-        </li>
-        <li class="cyan">
-          <a href="#"><span>(29)</span></a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
   <div class="widget size mb-50">
     <h6 class="widget-title mb-30">Filter by Size</h6>
     <div class="widget-desc">
@@ -90,41 +80,5 @@
       </ul>
     </div>
   </div>
-
-  <div class="widget recommended">
-    <h6 class="widget-title mb-30">Recommended</h6>
-
-    <div class="widget-desc">
-      <!-- Single Recommended Product -->
-      <div class="single-recommended-product d-flex mb-30">
-        <div class="single-recommended-thumb mr-3">
-          <img src="../../../../assets/img/product-img/product-10.jpg" alt="" />
-        </div>
-        <div class="single-recommended-desc">
-          <h6>Men’s T-shirt</h6>
-          <p>$ 39.99</p>
-        </div>
-      </div>
-      <!-- Single Recommended Product -->
-      <div class="single-recommended-product d-flex mb-30">
-        <div class="single-recommended-thumb mr-3">
-          <img src="../../../../assets/img/product-img/product-11.jpg" alt="" />
-        </div>
-        <div class="single-recommended-desc">
-          <h6>Blue mini top</h6>
-          <p>$ 19.99</p>
-        </div>
-      </div>
-      <!-- Single Recommended Product -->
-      <div class="single-recommended-product d-flex">
-        <div class="single-recommended-thumb mr-3">
-          <img src="../../../../assets/img/product-img/product-12.jpg" alt="" />
-        </div>
-        <div class="single-recommended-desc">
-          <h6>Women’s T-shirt</h6>
-          <p>$ 39.99</p>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 </div>
