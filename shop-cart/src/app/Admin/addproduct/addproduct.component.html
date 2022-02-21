@@ -1,0 +1,97 @@
+<div class="login_area section_padding_10">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12 ml-md-auto mr-md-auto">
+        <div class="login-popup-wrapper">
+          <div class="modal-header">
+            <h5>Add Product</h5>
+          </div>
+
+          <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            <div class="modal-body">
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  maxlength="20"
+                  placeholder="Product Name"
+                  [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="price"
+                  class="form-control"
+                  placeholder="Price"
+                  [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="category"
+                  class="form-control"
+                  placeholder="category"
+                  [ngClass]="{ 'is-invalid': submitted && f.category.errors }"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="color"
+                  class="form-control"
+                  placeholder="color"
+                  [ngClass]="{ 'is-invalid': submitted && f.color.errors }"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  formControlName="description"
+                  rows="3"
+                  maxlength="50"
+                  placeholder="Description"
+                  style="height: 100px"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.description.errors
+                  }"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                &nbsp;&nbsp;&nbsp;
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onCancel()"
+                >
+                  Close
+                </button>
+                &nbsp;&nbsp;&nbsp;
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onReset()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

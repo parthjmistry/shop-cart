@@ -45,7 +45,8 @@
                 <td>{{userItem.Email}}</td>
                 <td>{{userItem.PhoneNo}}</td>
                 <td>10-02-1990</td>
-                <td><i class="ti-pencil" aria-hidden="true"></i> &nbsp; &nbsp;<i class="ti-trash" aria-hidden="true"></i></td>
+                <td>
+                    <i (click)="updateUser(userItem.UserId)" class="ti-pencil" aria-hidden="true"></i> &nbsp; &nbsp;<i (click)="deleteUser(userItem.UserId, userItem.FirstName + ' ' + userItem.LastName)" class="ti-trash" aria-hidden="true"></i></td>
             </tr>
 
           </tbody>

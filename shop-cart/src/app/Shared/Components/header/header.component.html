@@ -9,7 +9,7 @@
                         <div class="header-cart-menu d-flex align-items-center mr-auto">
                             <!-- Cart Area -->
                             <div class="header-right-side-menu mr-15" *ngIf="!logged">
-                                <a [routerLink]="['/login']" ><i class="ti-user" aria-hidden="true"></i></a> 
+                                <a [routerLink]="['/login']" ><i class="ti-user" aria-hidden="true"></i></a>
                                 <!-- login -->
                             </div>
                             <div class="header-right-side-menu mr-15" *ngIf="logged">
@@ -26,7 +26,7 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
-                                <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
+                                <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">{{localCartItemCount}}</span> <i class="ti-bag"></i> Your Bag ${{localCartItemPrice | number : "1.0-2" }}</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">
                                     <li>
@@ -49,7 +49,7 @@
                                         <span class="pull-right">Total: $20.00</span>
                                         <a [routerLink]="['/cart']" class="btn btn-sm btn-cart">Cart</a>
                                         <a [routerLink]="['/checkout']" class="btn btn-sm btn-checkout">Checkout</a>
-                                       
+
                                     </li>
                                 </ul>
                             </div>
@@ -86,7 +86,7 @@
                                     <li class="nav-item"><a class="nav-link" [routerLink]="['/product-details']">Product Details</a></li>
                                     <li class="nav-item"><a class="nav-link" [routerLink]="['/cart']">Cart</a></li>
                                     <li class="nav-item"><a class="nav-link" [routerLink]="['/checkout']">Checkout</a></li>
-                                    
+
                                 </ul>
                             </div>
                         </nav>

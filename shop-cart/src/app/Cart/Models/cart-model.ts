@@ -13,3 +13,19 @@ export class CartModel {
     this.Amount = 0;
   }
 }
+
+export class CartModelNew {
+  public id: number;
+  public name: string;
+  public price: number;
+  public img: string;
+  public Qty:number;
+
+  constructor() {
+    this.id = 0;
+    this.name = '';
+    this.price= 0;
+    this.img= '';
+    this.Qty=1;
+  }
+}
