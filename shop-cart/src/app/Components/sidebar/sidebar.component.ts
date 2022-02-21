@@ -10,7 +10,9 @@ export class SidebarComponent implements OnInit {
   categoryList: string[] = [];
   colorList: string[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {
+    
+  }
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -23,6 +25,8 @@ export class SidebarComponent implements OnInit {
       //console.log(data);
       this.categoryList = data;
     });
+
+     
   }
 
   getColorList() {
