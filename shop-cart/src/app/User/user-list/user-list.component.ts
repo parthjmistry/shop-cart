@@ -15,14 +15,34 @@ export class UserListComponent implements OnInit {
   UserList : UserViewModel[] = []
   
   ngOnInit(): void {
-    const userObservable = this.userService.getUsers();
-        userObservable.subscribe((UserList: UserViewModel[]) => {
-          this.UserList = UserList;
-        });
-        
+    this.getUserList();
   }
- 
+  getUserList(){
+    if(localStorage.getItem('userList') === null)
+    {
+      const userObservable = this.userService.getUsers();
+          userObservable.subscribe((UserList: UserViewModel[]) => {
+            this.UserList = UserList;
+            localStorage.setItem('userList', JSON.stringify(this.UserList));
+          });
+      }
+      else{
+        
+        this.UserList = JSON.parse(localStorage.getItem('userList') as string);
+      }
+  }
+ deleteUser(userId : number, name : string): void{
+  if(confirm("Are you sure to delete this user " + name)) {
+    this.UserList = this.UserList.filter(item => item.UserId !== userId);
+  localStorage.setItem('userList', JSON.stringify(this.UserList));
+  }
+  
+ }
+ updateUser(userId : number){
+  this.modalRef = this.modalService.show(UserAddComponent);
+ }
   OpenModalAddUser() {
     this.modalRef = this.modalService.show(UserAddComponent);
+    this.modalService.onHidden.subscribe(result => { this.getUserList()})
   }
 }
