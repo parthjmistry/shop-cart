@@ -97,3 +97,42 @@ form .form-control{
 .profile-details ul li + li{
   margin-top:15px;
 }
+.btn-primary{
+  width: auto;
+  height: 48px;
+  padding: 10px 30px;
+  background-color: #ff084e;
+  color: #fff;
+  display: inline-block;
+  line-height: 28px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform:uppercase;
+  border:0;
+}
+.btn-primary:hover, .btn-primary:focus{
+  background-color:#3a3a3a !important;
+  color:#fff;
+  outline:0;
+  text-decoration:none;
+}
+.btn-secondary{
+  background-color: #3a3a3a;
+  height: 48px;
+  padding: 10px 30px;
+  line-height: 28px;
+  font-size: 15px;
+  text-transform:uppercase;
+  border:0;
+  font-weight: 600;
+}
+.btn-secondary:hover, .btn-secondary:focus{
+  background-color:#000 !important;
+}
+.modal-dialog{
+  display: flex;
+  align-items: center;
+}
+.modal{
+  background:rgba(0,0,0,0.7);
+}
