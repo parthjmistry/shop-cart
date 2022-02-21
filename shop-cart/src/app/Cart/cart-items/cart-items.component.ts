@@ -13,10 +13,7 @@ import { CartServiceService } from '../Services/cart-service.service';
 })
 export class CartItemsComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
-  Products: CartModel[] = [];
-  NewProduct: CartModel = new CartModel();
-  Cart: CartModel[] = [];
-  CartItemNew: CartModelNew[] = [];
+  CartItems: CartModelNew[] = [];
 
   constructor(
     private router: Router,
@@ -24,36 +21,27 @@ export class CartItemsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.CartService.Products$.subscribe((res) => {
-      this.Products = res;
-      console.log('----------------------------');
-      console.log(res);
-    });
-
-    this.CartItemNew = JSON.parse(localStorage.getItem('cartItem') || '{}');
-  }
-
-  AddToCart() {
-    this.CartService.AddItemToCart(this.NewProduct);
+    this.CartItems = JSON.parse(localStorage.getItem('cartItem') || '{}');
+    console.log(this.CartItems);
   }
 
   EditItem(Action: string, ProdutId: number) {
     if (Action === 'Add') {
-      this.CartItemNew.filter((List) => List.id === ProdutId).map(
+      this.CartItems.filter((List) => List.id === ProdutId).map(
         (List) => (List.Qty += 1)
       );
     } else {
-      this.CartItemNew.filter((List) => List.id === ProdutId).map((List) =>
+      this.CartItems.filter((List) => List.id === ProdutId).map((List) =>
         List.Qty > 1 ? (List.Qty -= 1) : 1
       );
     }
 
-    localStorage.setItem('cartItem', JSON.stringify(this.CartItemNew));
+    localStorage.setItem('cartItem', JSON.stringify(this.CartItems));
   }
 
   deleteCartItem(itemId: number) {
     if (confirm('Are you sure you want to delete item from cart?')) {
-      const currentArray = this.CartItemNew;
+      const currentArray = this.CartItems;
       for (let i = 0; i < currentArray.length; ++i) {
         if (currentArray[i].id === itemId) {
           currentArray.splice(i, 1);
@@ -64,7 +52,14 @@ export class CartItemsComponent implements OnInit {
   }
 
   ClearCart() {
-    this.Products = [];
-    this.router.navigateByUrl('cart');
+    localStorage.removeItem('cartItem');
+    this.reloadComponent();
   }
+
+  reloadComponent() {
+    let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([currentUrl]);
+    }
 }

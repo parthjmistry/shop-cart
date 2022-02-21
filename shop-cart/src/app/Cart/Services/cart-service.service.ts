@@ -6,6 +6,8 @@ import { CartModel } from '../Models/cart-model';
   providedIn: 'root',
 })
 export class CartServiceService {
+  public CartItemCount$ = new BehaviorSubject<number>(0);
+
   private _Cart = new BehaviorSubject<CartModel[]>([]);
   readonly Products$ = this._Cart.asObservable();
 
@@ -13,6 +15,14 @@ export class CartServiceService {
   private nextId = 0;
 
   constructor() {}
+
+  GetCartItemCount() {
+    const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
+    for (let i = 0; i < currentArray.length; ++i) {
+      this.CartItemCount$ += currentArray[i].Qty;
+    }
+    return this.CartItemCount$.asObservable();
+  }
 
   GetCartItems() {
     this._Cart.next(this.Products);

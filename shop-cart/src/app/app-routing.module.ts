@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'user-add', component: UserAddComponent },
-  
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

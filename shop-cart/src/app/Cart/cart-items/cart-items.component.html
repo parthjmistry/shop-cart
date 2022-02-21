@@ -1,65 +1,75 @@
-<div class="cart-table clearfix">
-  <table class="table table-responsive">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cartItem of CartItemNew">
-        <td class="cart_product_img d-flex align-items-center">
-          <a href="#"
-            ><img
-              [src]="baseUrl + 'assets/img/product-img/' + cartItem.img"
-              [alt]="cartItem.name"
-          /></a>
-          <h6>{{ cartItem.name }}</h6>
-        </td>
-        <td class="price">
-          <span>${{ cartItem.price }}</span>
-        </td>
-        <td class="qty">
-          <div class="quantity">
-            <span
-              class="qty-minus border"
-              (click)="EditItem('Remove', cartItem.id)"
-              ><i class="fa fa-minus" aria-hidden="true"></i
+<ng-template #EmptyCart>
+  <div class="text-center">
+    <img
+      [src]="baseUrl + 'assets/img/product-img/empty_cart.jpg'"
+      style="height: 500px;"
+    />
+  </div>
+</ng-template>
+
+<div *ngIf="CartItems.length > 0; else EmptyCart">
+  <div class="cart-table clearfix">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartItem of CartItems">
+          <td class="cart_product_img d-flex align-items-center">
+            <a href="#"
+              ><img
+                [src]="baseUrl + 'assets/img/product-img/' + cartItem.img"
+                [alt]="cartItem.name"
+            /></a>
+            <h6>{{ cartItem.name }}</h6>
+          </td>
+          <td class="price">
+            <span>${{ cartItem.price }}</span>
+          </td>
+          <td class="qty">
+            <div class="quantity">
+              <span
+                class="qty-minus border"
+                (click)="EditItem('Remove', cartItem.id)"
+                ><i class="fa fa-minus" aria-hidden="true"></i
+              ></span>
+              <label
+                class="qty-text"
+                style="margin-top: 8px; padding-top: 8px"
+                >{{ cartItem.Qty }}</label
+              >
+              <span
+                class="qty-plus border"
+                (click)="EditItem('Add', cartItem.id)"
+                ><i class="fa fa-plus" aria-hidden="true"></i
+              ></span>
+            </div>
+          </td>
+          <td class="total_price">
+            <span>${{ cartItem.price * cartItem.Qty | number: "1.0-2" }}</span>
+          </td>
+          <td>
+            <span (click)="deleteCartItem(cartItem.id)"
+              ><i class="fa fa-remove" aria-hidden="true"></i
             ></span>
-            <input
-              type="text"
-              class="qty-text"
-              id="qty"
-              name="quantity"
-              value="{{ cartItem.Qty }}"
-            />
-            <span class="qty-plus border" (click)="EditItem('Add', cartItem.id)"
-              ><i class="fa fa-plus" aria-hidden="true"></i
-            ></span>
-          </div>
-        </td>
-        <td class="total_price">
-          <span>${{ cartItem.price * cartItem.Qty | number: '1.0-2' }}</span>
-        </td>
-        <td>
-          <span (click)="deleteCartItem(cartItem.id)"
-            ><i class="fa fa-remove" aria-hidden="true"></i
-          ></span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div class="cart-footer d-flex mt-30">
   <div class="back-to-shop w-50">
     <a [routerLink]="['../shop']">Continue shooping</a>
   </div>
-  <!-- <div class="update-checkout w-50 text-right">
+  <div class="update-checkout w-50 text-right">
     <a (click)="ClearCart()">clear cart</a>
-    <a (click)="AddToCart()">Add to cart</a>
-  </div> -->
+  </div>
 </div>
