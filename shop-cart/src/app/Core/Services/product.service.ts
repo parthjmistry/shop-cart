@@ -17,9 +17,10 @@ export class ProductService {
   colorList = new BehaviorSubject<string[]>([]);
 
   colorName = new BehaviorSubject<string>('');
-  jsonfilePath = 'assets/products.json';
+  //jsonfilePath = 'assets/products.json';
   //jsonfilePath = 'https://angshopcart-default-rtdb.firebaseio.com/products.json'
 
+  jsonfilePath = 'http://localhost:3000/products';
   productList: Product[] = [];
 
   httpOptions = {
@@ -86,6 +87,14 @@ export class ProductService {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.id === pid))
     );
+  }
+
+  // Delete
+  delete(id: any) {
+    var API_URL = `${this.jsonfilePath}/${id}`;
+    return this.http.delete(API_URL).pipe(
+      catchError(this.errorHandler)
+    )
   }
 
   errorHandler(error:any) {

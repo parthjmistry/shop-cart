@@ -29,6 +29,14 @@ export class ListproductComponent implements OnInit {
     });
   }
 
+  deleteProduct(id: number) {
+    if (confirm('are you sure want to delete?')) {
+      this.productService.delete(id).subscribe((data) => {
+        this.getProductList();
+      });
+    }
+  }
+
   AddProductModal() {
     this.modalRef = this.modalService.show(AddproductComponent);
   }

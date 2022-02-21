@@ -24,10 +24,10 @@
           <td>{{ product.name }}</td>
           <td>${{ product.price }}</td>
           <td>
-            <button class="btn" type="button" [routerLink]="['/crud/update/', product.id]">
+            <button class="btn" type="button">
               Update
             </button>
-            <button class="btn" type="button">Remove</button>
+            <button class="btn" type="button" (click)=" deleteProduct(product.id)" >Remove</button>
           </td>
         </tr>
       </tbody>
