@@ -68,13 +68,14 @@ export class UserAddComponent implements OnInit {
     }    
     
   }
-  public onCancel(): void {
+onCancel(): void {
     this.modalService.config.initialState = undefined;
     this._bsModalRef.hide();
 }
 onReset() {
   this.submitted = false;
   this.userAdd.reset();
+  this.modalService.config.initialState = undefined;
 }
 reloadCurrentRoute() {
   let currentUrl = this.route.url;
