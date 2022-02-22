@@ -75,6 +75,7 @@ export class UserAddComponent implements OnInit {
 onReset() {
   this.submitted = false;
   this.userAdd.reset();
+  this.modalService.config.initialState = undefined;
 }
 reloadCurrentRoute() {
   let currentUrl = this.route.url;
