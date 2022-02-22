@@ -68,7 +68,7 @@ export class UserAddComponent implements OnInit {
     }    
     
   }
-  public onCancel(): void {
+onCancel(): void {
     this.modalService.config.initialState = undefined;
     this._bsModalRef.hide();
 }
