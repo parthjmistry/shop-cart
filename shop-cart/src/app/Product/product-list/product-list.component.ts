@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartModel } from 'src/app/Cart/Models/cart-model';
+import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 import { Product } from 'src/app/Core/Models/ProductModel';
 import { ProductService } from 'src/app/Core/Services/product.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,10 @@ export class ProductListComponent implements OnInit {
 
   //categoryName: string;
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private _cartService: CartServiceService
+  ) {
     // subscribe category name from subject
     this.productService.categoryName.subscribe((res: string) => {
       this.categoryName = res;
@@ -87,6 +91,8 @@ export class ProductListComponent implements OnInit {
 
       localStorage.setItem('cartItem', JSON.stringify(this.cartData));
       alert(data[0].name + ' added in cart.');
+      this._cartService.setCartItemCount();
+
     });
   }
 }

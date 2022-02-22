@@ -1,28 +1,37 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { CartModel } from '../Models/cart-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartServiceService {
-  public CartItemCount$ = new BehaviorSubject<number>(0);
+  cartItemCount = new BehaviorSubject<number>(0);
+  cartItemAmount = new BehaviorSubject<number>(0);
+  TotalCartAmt: number = 0;
+
+  setCartItemCount() {
+    this.TotalCartAmt = 0;
+
+    const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
+
+    for (let i = 0; i < currentArray.length; ++i) {
+      this.TotalCartAmt += currentArray[i].Qty * currentArray[i].price;
+    }
+
+    this.cartItemCount.next(currentArray.length);
+    this.cartItemAmount.next(this.TotalCartAmt);
+  }
+
+  constructor() {
+    this.setCartItemCount();
+  }
 
   private _Cart = new BehaviorSubject<CartModel[]>([]);
   readonly Products$ = this._Cart.asObservable();
 
   private Products: CartModel[] = [];
   private nextId = 0;
-
-  constructor() {}
-
-  GetCartItemCount() {
-    const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
-    for (let i = 0; i < currentArray.length; ++i) {
-      this.CartItemCount$ += currentArray[i].Qty;
-    }
-    return this.CartItemCount$.asObservable();
-  }
 
   GetCartItems() {
     this._Cart.next(this.Products);

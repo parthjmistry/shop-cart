@@ -33,7 +33,6 @@ export class ProductService {
   
 
   addProduct(product: Product) {
-    debugger
     return this.http.post<Product>(this.jsonfilePath, JSON.stringify(product), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)

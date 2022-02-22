@@ -1,49 +1,57 @@
 <section class="shop_grid_area section_padding_100">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 col-lg-3">
-               <app-sidebar></app-sidebar>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-3">
+        <app-sidebar></app-sidebar>
+      </div>
 
-            <div class="col-12 col-md-8 col-lg-9">
-                <div class="shop_grid_product_area">
-                  <ng-container *ngIf="productList">
-                    <div class="row">
-                      <!-- Single gallery Item -->
-                      <div
-                        class="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig"
-                        data-wow-delay="1s"
-                        *ngFor="let product of productList"
-                      >
-                        <!-- Product Image -->
-                        <div class="product-img">
-                          <img
-                            [src]="baseUrl + 'assets/img/product-img/' + product.img"
-                            [alt]="product.name"
-                          />
-                          <div class="product-quicview">
-                            <a href="#" data-toggle="modal" data-target="#quickview"
-                              ><i class="ti-plus"></i
-                            ></a>
-                          </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                          <h4 class="product-price">${{ product.price }}</h4>
-                          <p [innerText]="product.name"></p>
-        
-                          <!-- Add to Cart -->
-                          <a href="javascript:void(0);" class="add-to-cart-btn" (click) = "addToCart(product.id)">ADD TO CART</a>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-container>
-        
-                  <ng-container *ngIf="!productList.length">
-                    <div class="container">No Products found</div>
-                  </ng-container>
+      <div class="col-12 col-md-8 col-lg-9">
+        <div class="shop_grid_product_area">
+          <ng-container *ngIf="productList">
+            <div class="row">
+              <!-- Single gallery Item -->
+              <div
+                class="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig"
+                data-wow-delay="1s"
+                *ngFor="let product of productList"
+              >
+                <!-- Product Image -->
+                <div class="product-img">
+                  <img
+                    [src]="baseUrl + 'assets/img/product-img/' + product.img"
+                    [alt]="product.name"
+                  />
+                  <div class="product-quicview">
+                    <a href="#" data-toggle="modal" data-target="#quickview"
+                      ><i class="ti-plus"></i
+                    ></a>
+                  </div>
+                </div>
+                <!-- Product Description -->
+                <div class="product-description">
+                  <h4 class="product-price">${{ product.price }}</h4>
+                  <a
+                    routerLink="/product-details/{{ product.id }}"
+                    ><p [innerText]="product.name"></p
+                  ></a>
+
+                  <!-- Add to Cart -->
+                  <a
+                    href="javascript:void(0);"
+                    class="add-to-cart-btn"
+                    (click)="addToCart(product.id)"
+                    >ADD TO CART</a
+                  >
                 </div>
               </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="!productList.length">
+            <div class="container">No Products found</div>
+          </ng-container>
         </div>
+      </div>
     </div>
+  </div>
 </section>
