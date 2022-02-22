@@ -136,3 +136,7 @@ form .form-control{
 .modal{
   background:rgba(0,0,0,0.7);
 }
+
+.widget-desc ul{ padding-left: 0;}
+.widget-desc ul li{ margin-right: 5px;}
+.menu-list .menu-content{padding-left: 0;}
