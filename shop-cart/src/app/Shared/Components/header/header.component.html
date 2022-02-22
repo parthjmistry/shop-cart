@@ -26,7 +26,7 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
-                                <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">{{CartItemCount}}</span> <i class="ti-bag"></i> Your Bag ${{CartItemAmount | number : "1.0-2" }}</a>
+                                <a id="header-cart-btn" [routerLink]="['/cart']"><span class="cart_quantity">{{CartItemCount}}</span> <i class="ti-bag"></i> Your Bag ${{CartItemAmount | number : "1.0-2" }}</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">
                                     <li>
