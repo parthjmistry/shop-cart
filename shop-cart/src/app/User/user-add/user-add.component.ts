@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { MustMatchValidator } from 'src/app/Helpers/must-match-validator';
+import { MustMatch } from 'src/app/Helpers/must-match-validator';
 import { User } from 'src/app/Model/user-view-model';
 @Component({
   selector: 'app-user-add',
@@ -25,10 +25,10 @@ export class UserAddComponent implements OnInit {
       LastName: ['', Validators.required],
       password :['', [Validators.required]],
       confPassword : ['', Validators.required],
-      Email: ['', Validators.required, Validators.pattern(this.emailPattern)],
+      Email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       PhoneNo: ['', Validators.required]
      }, {
-      validator: MustMatchValidator('password', 'confPassword')
+      validator: MustMatch('password', 'confPassword')
   });
     
   }
@@ -62,5 +62,5 @@ reloadCurrentRoute() {
       this.route.onSameUrlNavigation = 'reload';
       this.route.navigate([currentUrl]);
   }
-
+  
 }
