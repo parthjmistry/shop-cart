@@ -4,17 +4,27 @@
       <div class="col-12 col-md-12 ml-md-auto mr-md-auto">
         <div class="login-popup-wrapper">
           <div class="modal-header">
-            <h5>Add Product</h5>
+            <h5>{{ isEdit ? "Update Product" : "Add Product" }}</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="onCancel()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
 
           <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            
             <div class="modal-body">
               <div class="form-group">
                 <input
                   type="text"
                   formControlName="name"
                   class="form-control"
-                  maxlength="20"
+                  maxlength="100"
                   placeholder="Product Name"
                   [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                   required
@@ -23,13 +33,14 @@
 
               <div class="form-group">
                 <input
-                   type="number"
+                  type="number"
                   formControlName="price"
                   class="form-control"
                   placeholder="Price"
-                  [ngClass]="{ 'is-invalid': submitted && f.price.errors && f.price.patter }"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.price.errors
+                  }"
                   required
-                  min="2"
                 />
               </div>
               <div class="form-group">
@@ -68,8 +79,7 @@
                 <textarea
                   class="form-control"
                   formControlName="description"
-                  rows="3"
-                  maxlength="50"
+                  maxlength="500"
                   placeholder="Description"
                   style="height: 100px"
                   [ngClass]="{
@@ -81,15 +91,14 @@
             </div>
             <div class="modal-footer">
               <div class="text-center">
-                <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Submit</button>
-                &nbsp;&nbsp;&nbsp;
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary"
-                  (click)="onCancel()"
+                  [disabled]="!productForm.valid"
                 >
-                  Close
+                  {{ isEdit ? "UPDATE" : "SUBMIT" }}
                 </button>
+                
                 &nbsp;&nbsp;&nbsp;
                 <button
                   type="button"

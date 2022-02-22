@@ -4,7 +4,7 @@
 </div>
 
 <ul class="order-details-form mb-4">
-  <li><span>Product</span> <span>Total</span></li>
+  <li><span><strong>Product</strong></span> <span><strong>Total</strong></span></li>
 
   <div *ngFor="let cartItem of CartItems">
     <li>
@@ -18,14 +18,14 @@
   </div>
 
   <li>
-    <span>Subtotal</span>
+    <span><strong>Subtotal</strong></span>
     <span style="font-size: medium"
       ><strong>${{ CartItemAmount | number: "1.0-2" }}</strong></span
     >
   </li>
-  <li><span>Shipping</span> <span>Free</span></li>
+  <li><span><strong>Shipping</strong></span><strong><span>Free</span></strong></li>
   <li>
-    <span>Total</span>
+    <span><strong>Total</strong></span>
     <span style="font-size: medium"
       ><strong>${{ CartItemAmount | number: "1.0-2" }}</strong></span
     >
