@@ -11,11 +11,13 @@
       <div class="col-md-4">
         <div class="cart-total-area mt-70">
           <ul class="cart-total-chart">
-            <li><span>Subtotal</span> <span>$59.90</span></li>
+            <li><span>Subtotal</span> <span>${{ cartItemAmount | number: "1.0-2" }}</span></li>
             <li><span>Shipping</span> <span>Free</span></li>
             <li>
               <span><strong>Total</strong></span>
-              <span><strong>$59.90</strong></span>
+              <span
+                ><strong>${{ cartItemAmount | number: "1.0-2" }}</strong></span
+              >
             </li>
           </ul>
           <a [routerLink]="['../checkout']" class="btn karl-checkout-btn"

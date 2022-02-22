@@ -8,12 +8,15 @@ import { CartServiceService } from '../Services/cart-service.service';
 })
 export class CartComponent implements OnInit {
   cartItemCount: number = 0;
+  cartItemAmount: number = 0;
 
   constructor(private _cartService: CartServiceService) {
-    console.log('--------cart-----------');
     this._cartService.cartItemCount.subscribe((itemCount) => {
       this.cartItemCount = itemCount;
-      console.log(this.cartItemCount);
+    });
+
+    this._cartService.cartItemAmount.subscribe((itemAmt) => {
+      this.cartItemAmount = itemAmt;
     });
   }
 
