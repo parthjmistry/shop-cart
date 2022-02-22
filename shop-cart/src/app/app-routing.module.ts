@@ -7,6 +7,7 @@ import { CheckoutComponent } from './Checkout/checkout/checkout.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { ProductDetailComponent } from './Product/product-detail/product-detail.component';
 import { ProductListComponent } from './Product/product-list/product-list.component';
+import { AuthGuard } from './Service/auth.guard';
 import { LoginComponent } from './User/login/login.component';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
 import { SignUpComponent } from './User/sign-up/sign-up.component';
@@ -20,19 +21,20 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'user-list', component: UserListComponent },
+  { path: 'user-list', component: UserListComponent , canActivate: [AuthGuard]},
   { path: 'user-details', component: UserDetailsComponent },
   { path: 'shop', component: ProductListComponent },
   { path: 'product-details', component: ProductDetailComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'user-add', component: UserAddComponent },
+  { path: 'user-add', component: UserAddComponent , canActivate: [AuthGuard]},
 
-  { path: 'admin/list-product', component: ListproductComponent },
-  { path: 'admin/add-product', component: AddproductComponent },
+  { path: 'admin/list-product', component: ListproductComponent, canActivate: [AuthGuard] },
+  { path: 'admin/add-product', component: AddproductComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
