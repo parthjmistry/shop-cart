@@ -11,6 +11,9 @@ export class CartComponent implements OnInit {
   cartItemAmount: number = 0;
 
   constructor(private _cartService: CartServiceService) {
+  }
+
+  ngOnInit(): void {
     this._cartService.cartItemCount.subscribe((itemCount) => {
       this.cartItemCount = itemCount;
     });
@@ -19,6 +22,4 @@ export class CartComponent implements OnInit {
       this.cartItemAmount = itemAmt;
     });
   }
-
-  ngOnInit(): void {}
 }

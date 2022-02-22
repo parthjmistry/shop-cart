@@ -23,7 +23,9 @@ export class CartServiceService {
     this.cartItemAmount.next(this.TotalCartAmt);
   }
 
-  constructor() {}
+  constructor() {
+    this.setCartItemCount();
+  }
 
   private _Cart = new BehaviorSubject<CartModel[]>([]);
   readonly Products$ = this._Cart.asObservable();
