@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'user-list', component: UserListComponent},
   { path: 'user-details', component: UserDetailsComponent },
   { path: 'shop', component: ProductListComponent },
-  { path: 'product-details', component: ProductDetailComponent },
+  { path: 'product-details/:id', component: ProductDetailComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'user-add', component: UserAddComponent , canActivate: [AuthGuard]},
