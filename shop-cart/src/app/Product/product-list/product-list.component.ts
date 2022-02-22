@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartModel } from 'src/app/Cart/Models/cart-model';
+import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 import { Product } from 'src/app/Core/Models/ProductModel';
 import { ProductService } from 'src/app/Core/Services/product.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,10 @@ export class ProductListComponent implements OnInit {
 
   //categoryName: string;
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private _cartService: CartServiceService
+  ) {
     // subscribe category name from subject
     this.productService.categoryName.subscribe((res: string) => {
       this.categoryName = res;
@@ -41,7 +45,7 @@ export class ProductListComponent implements OnInit {
     this.productService.colorName.subscribe((res: string) => {
       this.colorName = res;
 
-     // console.log(res);
+      // console.log(res);
 
       if (!this.colorName) {
         this.getProductList();
@@ -85,11 +89,12 @@ export class ProductListComponent implements OnInit {
   addToCart(pid: number) {
     this.productService.getProuductById(pid).subscribe((data) => {
       const itemId = data[0].id;
-      const isItemexits = this.cartData?.filter((res: any) => res.id === itemId);
+      const isItemexits = this.cartData?.filter(
+        (res: any) => res.id === itemId
+      );
 
       if (isItemexits.length > 0) {
         this.cartData.filter((res: any) => res.id === itemId)[0].Qty += 1;
-
       } else {
         this.cartData.push(data[0]);
         this.cartData.filter((res: any) => res.id === itemId)[0].Qty = 1;
@@ -97,6 +102,7 @@ export class ProductListComponent implements OnInit {
 
       localStorage.setItem('cartItem', JSON.stringify(this.cartData));
       alert(data[0].name + ' added in cart.');
+      this._cartService.setCartItemCount();
     });
   }
 }

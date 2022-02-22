@@ -2,8 +2,11 @@
   <div class="text-center">
     <img
       [src]="baseUrl + 'assets/img/product-img/empty_cart.jpg'"
-      style="height: 500px;"
+      style="height: 500px"
     />
+  </div>
+  <div class="back-to-shop text-center">
+    <a [routerLink]="['../shop']">Continue shooping</a>
   </div>
 </ng-template>
 
@@ -63,13 +66,13 @@
       </tbody>
     </table>
   </div>
-</div>
 
-<div class="cart-footer d-flex mt-30">
-  <div class="back-to-shop w-50">
-    <a [routerLink]="['../shop']">Continue shooping</a>
-  </div>
-  <div class="update-checkout w-50 text-right">
-    <a (click)="ClearCart()">clear cart</a>
+  <div class="cart-footer d-flex mt-30">
+    <div class="back-to-shop w-50">
+      <a [routerLink]="['../shop']">Continue shooping</a>
+    </div>
+    <div class="update-checkout w-50 text-right">
+      <a (click)="ClearCart()">clear cart</a>
+    </div>
   </div>
 </div>
