@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProductListComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
   categoryName: string = '';
+  colorName: string = '';
   productList: Product[] = [];
 
   cartData = (() => {
@@ -33,6 +34,17 @@ export class ProductListComponent implements OnInit {
         this.getProuductByCategory(res);
       }
     });
+    this.productService.colorName.subscribe((res: string) => {
+      this.colorName = res;
+
+     // console.log(res);
+
+      if (!this.colorName) {
+        this.getProductList();
+      } else {
+        this.getProuductByColor(res);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -47,6 +59,12 @@ export class ProductListComponent implements OnInit {
 
   getProuductByCategory(category: string) {
     this.productService.getProuductByCategory(category).subscribe((data) => {
+      this.productList = data;
+    });
+  }
+  getProuductByColor(color: string) {
+    this.productService.getProuductByColor(color).subscribe((data) => {
+      //console.log(data);
       this.productList = data;
     });
   }

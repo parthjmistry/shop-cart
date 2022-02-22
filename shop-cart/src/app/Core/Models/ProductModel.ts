@@ -9,5 +9,6 @@ export interface Product {
     img?: string;
     inCart?: boolean;
     category: string;
+    color:string;
 }
  

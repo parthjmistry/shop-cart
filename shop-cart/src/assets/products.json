@@ -8,7 +8,8 @@
       "type": "hardcover",
       "img": "product-1.jpg",
       "inCart": false,
-      "category": "business"
+      "category": "business",
+      "color" :"red"
     },
     {
       "id": 2,
@@ -19,7 +20,8 @@
       "type": "hardcover",
       "img": "product-2.jpg",
       "inCart": false,
-      "category": "business"
+      "category": "business",
+      "color" :"green"
     },
     {
       "id": 3,
@@ -30,7 +32,8 @@
       "type": "paperback",
       "img": "product-3.jpg",
       "inCart": false,
-      "category": "business"
+      "category": "business",
+      "color" :"pink"
     },
     {
       "id": 4,
@@ -41,7 +44,8 @@
       "type": "hardcover",
       "img": "product-4.jpg",
       "inCart": false,
-      "category": "business"
+      "category": "business",
+      "color" :"blue"
     },
     {
       "id": 5,
@@ -52,7 +56,8 @@
       "type": "paperback",
       "img": "product-5.jpg",
       "inCart": false,
-      "category": "business"
+      "category": "business",
+      "color" :"red"
     },
     {
       "id": 6,
@@ -63,7 +68,8 @@
       "type": "hardcover",
       "img": "product-6.jpg",
       "inCart": false,
-      "category": "cookbooks"
+      "category": "cookbooks",
+      "color" :"black"
     },
     {
       "id": 7,
@@ -74,7 +80,8 @@
       "type": "harcover",
       "img": "product-7.jpg",
       "inCart": false,
-      "category": "cookbooks"
+      "category": "cookbooks",
+      "color" :"green"
     },
     {
       "id": 10,
@@ -85,7 +92,8 @@
       "type": "kindle",
       "img": "product-8.jpg",
       "inCart": false,
-      "category": "mystery"
+      "category": "mystery",
+      "color" :"black"
     },
     {
       "id": 11,
@@ -96,7 +104,9 @@
       "type": "paperback",
       "img": "product-9.jpg",
       "inCart": false,
-      "category": "mystery"
+      "category": "mystery",
+      "color" :"pink"
+      
     },
     {
       "id": 12,
@@ -107,7 +117,9 @@
       "type": "paperback",
       "img": "product-3.jpg",
       "inCart": false,
-      "category": "mystery"
+      "category": "mystery",
+      "color" :"gray"
+      
     },
     {
       "id": 16,
@@ -118,7 +130,8 @@
       "type": "hardcover",
       "img": "product-1.jpg",
       "inCart": false,
-      "category": "scifi"
+      "category": "scifi",
+      "color" :"pink"
     },
     {
       "id": 17,
@@ -129,7 +142,8 @@
       "type": "hardcover",
       "img": "product-9.jpg",
       "inCart": false,
-      "category": "accessories"
+      "category": "accessories",
+      "color" :"pink"
     }
     
   ]
