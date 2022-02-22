@@ -96,6 +96,14 @@ export class ProductService {
     )
   }
 
+  updateProduct(id:number, product:Product): Observable<Product> {
+    return this.http.put<Product>(this.jsonfilePath +'/' + id, JSON.stringify(product), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+ 
+
   errorHandler(error:any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {

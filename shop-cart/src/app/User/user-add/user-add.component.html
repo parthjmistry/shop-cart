@@ -8,33 +8,33 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
                 <span aria-hidden="true">&times;</span>
               </button>
-          </div> 
+          </div>
         <form [formGroup]="userAdd" (ngSubmit)="FormSubmit()" >
             <div class="modal-body">
             <div class="form-group">
-                <input type="text"  name="FirstName" formControlName="FirstName" placeholder="First Name" class = "form-control" 
+                <input type="text"  name="FirstName" formControlName="FirstName" placeholder="First Name" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" required>
             </div>
             <div class="form-group">
-                <input type="text"  name="LastName" formControlName="LastName" placeholder="Last Name" class = "form-control" 
+                <input type="text"  name="LastName" formControlName="LastName" placeholder="Last Name" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" required>
             </div>
             <div class="form-group">
-                <input type="text" name="Email" formControlName="Email" placeholder="Email" class = "form-control" [pattern]="emailPattern" 
+                <input type="text" name="Email" formControlName="Email" placeholder="Email" class = "form-control" [pattern]="emailPattern"
                     [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" required>
             </div>
             <div class="form-group">
-                <input type="password"  name="password" formControlName="password" placeholder="Password" class = "form-control" 
+                <input type="password"  name="password" formControlName="password" placeholder="Password" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
-                    
+
             </div>
             <div class="form-group">
-                <input type="password"  name="confPassword" formControlName="confPassword" placeholder="Confirm Password" class = "form-control" 
+                <input type="password"  name="confPassword" formControlName="confPassword" placeholder="Confirm Password" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }" required>
                     <div *ngIf="f.confPassword.errors.mustMatch"></div>
             </div>
             <div class="form-group">
-                <input type="text" name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" class = "form-control" 
+                <input type="text" name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.PhoneNo.errors }" required>
             </div>
         </div>
