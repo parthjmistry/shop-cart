@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 import { Product } from 'src/app/Core/Models/ProductModel';
 import { ProductService } from 'src/app/Core/Services/product.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private _cartService: CartServiceService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,8 @@ export class ProductDetailComponent implements OnInit {
 
       localStorage.setItem('cartItem', JSON.stringify(this.cartData));
       alert(data[0].name + ' added in cart.');
+
+      this._cartService.setCartItemCount();
     });
   }
 }
