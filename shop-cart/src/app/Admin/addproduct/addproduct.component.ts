@@ -17,9 +17,10 @@ export class AddproductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: ['', Validators.required],
+      price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       category: ['', Validators.required],
       color: ['', Validators.required],
+      img: ['', Validators.required],
     });
   }
 
@@ -42,14 +43,16 @@ export class AddproductComponent implements OnInit {
 
     //console.log(this.productForm.value);
 
-    // this.productService.addProduct(this.productForm.value).subscribe((res) => {
-
-    //   console.log(this.productForm.value);
-    //   //this.bsModalRef.hide();
-    // });
+    this.productService.addProduct(this.productForm.value).subscribe((res) => {
+      //console.log(this.productForm.value);
+      this.productForm.reset();
+      this.bsModalRef.hide();
+      
+    });
   }
 
   public onCancel(): void {
+    this.productForm.reset();
     this.bsModalRef.hide();
   }
   onReset() {

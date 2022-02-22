@@ -33,33 +33,25 @@ export class ProductListComponent implements OnInit {
     // subscribe category name from subject
     this.productService.categoryName.subscribe((res: string) => {
       this.categoryName = res;
-
-      // console.log(res);
-
-      if (!this.categoryName) {
-        this.getProductList();
-      } else {
+      if (res != '') {
         this.getProuductByCategory(res);
       }
     });
+
     this.productService.colorName.subscribe((res: string) => {
       this.colorName = res;
-
       // console.log(res);
-
-      if (!this.colorName) {
-        this.getProductList();
-      } else {
+      if (res != '') {
         this.getProuductByColor(res);
       }
     });
+
+    if (!this.categoryName && !this.colorName) {
+      this.getProductList();
+    }
   }
 
-  ngOnInit(): void {
-    // reset subject
-    //this.productService.categoryName.next('');
-    //this.cartData =  JSON.parse(localStorage.getItem('cartItem') || '{}');
-  }
+  ngOnInit(): void {}
 
   getProductList() {
     this.productService.getProductData().subscribe((data) => {
@@ -69,10 +61,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getProuductByCategory(category: string) {
-    this.productService.getProuductByCategory(category).subscribe((data) => {
-      //console.log(data);
-      this.productList = data;
-    });
+    this.productService
+      .getProuductByCategory(this.categoryName)
+      .subscribe((data) => {
+        //console.log(data);
+        this.productList = data;
+      });
   }
   getProuductByColor(color: string) {
     this.productService.getProuductByColor(color).subscribe((data) => {
@@ -80,11 +74,6 @@ export class ProductListComponent implements OnInit {
       this.productList = data;
     });
   }
-
-  // ngOnDestroy(): void {
-  //   // reset subject
-  //   this.productService.categoryName.next('');
-  // }
 
   addToCart(pid: number) {
     this.productService.getProuductById(pid).subscribe((data) => {

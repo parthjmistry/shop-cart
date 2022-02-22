@@ -38,9 +38,7 @@ export class UserListComponent implements OnInit {
   }
   
  }
- updateUser(userId : number){
-  this.modalRef = this.modalService.show(UserAddComponent);
- }
+ 
   OpenModalAddUser() {
     this.modalRef = this.modalService.show(UserAddComponent);
     this.modalService.onHidden.subscribe(result => { this.getUserList()})

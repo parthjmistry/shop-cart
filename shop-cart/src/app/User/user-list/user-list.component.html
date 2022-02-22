@@ -18,15 +18,15 @@
     <!-- <div class="help-line">
         <a class="help-line a"> Add User</a>
     </div> -->
-    
+
     <div class="container">
     <div class="mb-4 row">
         <div class="col-md-12 d-md-flex  align-items-center justify-content-between">
             <h2>Users List</h2>
-            <button class="btn cart-submit d-block" (click)="OpenModalAddUser()">Add User</button>
+            <button class="btn btn-primary" (click)="OpenModalAddUser()">Add User</button>
         </div>
     </div>
-        
+
       <table class="table">
           <thead>
               <tr>
@@ -46,9 +46,10 @@
                 <td>{{userItem.PhoneNo}}</td>
                 <td>10-02-1990</td>
                 <td>
-                    <i (click)="updateUser(userItem.UserId)" class="ti-pencil" aria-hidden="true"></i> &nbsp; &nbsp;<i (click)="deleteUser(userItem.UserId, userItem.FirstName + ' ' + userItem.LastName)" class="ti-trash" aria-hidden="true"></i></td>
+                    <!-- <i class="ti-pencil" aria-hidden="true"></i> &nbsp; &nbsp; -->
+                    <a title="Delete Users"> <i (click)="deleteUser(userItem.UserId, userItem.FirstName + ' ' + userItem.LastName)" class="ti-trash" aria-hidden="true"></i></a></td>
             </tr>
-    
+
           </tbody>
       </table>
     </div>

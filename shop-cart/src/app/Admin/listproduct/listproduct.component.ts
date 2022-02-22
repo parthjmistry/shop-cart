@@ -25,11 +25,20 @@ export class ListproductComponent implements OnInit {
 
   getProductList() {
     this.productService.getProductData().subscribe((data) => {
-      this.productList = data;
+      this.productList = data.sort((a, b) => (a < b ? -1 : 1));
     });
+  }
+
+  deleteProduct(id: number) {
+    if (confirm('are you sure want to delete?')) {
+      this.productService.delete(id).subscribe((data) => {
+        this.getProductList();
+      });
+    }
   }
 
   AddProductModal() {
     this.modalRef = this.modalService.show(AddproductComponent);
+    this.modalRef.onHidden?.subscribe((data) => this.getProductList());
   }
 }
