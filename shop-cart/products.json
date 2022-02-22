@@ -143,6 +143,15 @@
       "inCart": false,
       "category": "accessories",
       "color": "pink"
+    },
+    {
+      "name": "Product 3",
+      "description": "sldflasdfasj tesljtsjdf",
+      "price": 10,
+      "category": "business",
+      "color": "red",
+      "img": "product-3.jpg",
+      "id": 18
     }
   ]
 }

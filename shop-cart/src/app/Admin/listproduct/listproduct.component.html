@@ -5,7 +5,9 @@
         class="col-md-12 d-md-flex align-items-center justify-content-between"
       >
         <h2>Product List</h2>
-        <button  class="btn btn-primary" (click)="AddProductModal()">Add Product</button>
+        <button class="btn btn-primary" (click)="AddProductModal()">
+          Add Product
+        </button>
       </div>
     </div>
 
@@ -23,12 +25,15 @@
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
           <td>${{ product.price }}</td>
+
           <td>
-            <button class="btn btn-outline-success" type="button">
-              Update
-            </button>
-            &nbsp;
-            <button class="btn btn-outline-danger" type="button" (click)=" deleteProduct(product.id)" >Delete</button>
+            <a href="javascript:void(0)" (click)="updateProduct(product.id)"
+              ><i class="ti-pencil" aria-hidden="true"></i
+            ></a>
+            &nbsp; &nbsp;
+            <a href="javascript:void(0)" (click)="deleteProduct(product.id)">
+              <i class="ti-trash" aria-hidden="true"></i
+            ></a>
           </td>
         </tr>
       </tbody>
