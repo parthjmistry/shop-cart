@@ -20,6 +20,7 @@ export class AddproductComponent implements OnInit {
       price: ['', Validators.required],
       category: ['', Validators.required],
       color: ['', Validators.required],
+      img: ['', Validators.required],
     });
   }
 
@@ -42,11 +43,11 @@ export class AddproductComponent implements OnInit {
 
     console.log(this.productForm.value);
 
-    // this.productService.addProduct(this.productForm.value).subscribe((res) => {
+    this.productService.addProduct(this.productForm.value).subscribe((res) => {
 
-    //   console.log(this.productForm.value);
-    //   //this.bsModalRef.hide();
-    // });
+      console.log(this.productForm.value);
+      //this.bsModalRef.hide();
+    });
   }
 
   public onCancel(): void {

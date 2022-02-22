@@ -11,13 +11,17 @@ import { Product } from '../Models/ProductModel';
 export class ProductService {
 
   categoryName = new BehaviorSubject<string>('');
+
+  categoryList = new BehaviorSubject<string[]>([]);
+
+  colorList = new BehaviorSubject<string[]>([]);
+
   colorName = new BehaviorSubject<string>('');
-  jsonfilePath = 'assets/products.json';
+  //jsonfilePath = 'assets/products.json';
   //jsonfilePath = 'https://angshopcart-default-rtdb.firebaseio.com/products.json'
 
+  jsonfilePath = 'http://localhost:3000/products';
   productList: Product[] = [];
-  categoryList: string[] = [];
-  colorList: string[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -28,7 +32,8 @@ export class ProductService {
   constructor(private http: HttpClient) { }
   
 
-  addProduct(product:Product): Observable<Product> {
+  addProduct(product: Product) {
+    debugger
     return this.http.post<Product>(this.jsonfilePath, JSON.stringify(product), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
@@ -36,53 +41,43 @@ export class ProductService {
   }
    
 
-  getProductData(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.jsonfilePath)
-  }
-
-
   // getProductData(): Observable<Product[]> {
   //   return this.http.get<Product[]>(this.jsonfilePath)
-  //     .pipe(
-  //       map((data) => {
-  //         this.categoryList = [...new Set(data.map((obj) => obj.category))]
-  //         this.colorList = [...new Set(data.map((obj) => obj.color))]
-
-  //         return data;
-  //       })
-  //     )
   // }
 
-  getProductCategories() {
-    return this.getProductData().pipe(
-      map((data) => [...new Set(data.map((obj) => obj.category))])
-    );
 
-    // if (this.categoryList.length > 0) {
-    //   return this.categoryList;
-    // }
-    // else {
+  getProductData(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.jsonfilePath)
+      .pipe(
+        map((data) => {
+          
+          // set category and color list
+          this.categoryList.next([...new Set(data.map((obj) => obj.category))]);
+          this.colorList.next([...new Set(data.map((obj) => obj.color))]);
 
-    //   this.getProductData().pipe(
-    //     map(data => {
-    //       this.categoryList = [...new Set(data.map((obj) => obj.category))]
-    //     })
-    //   );
-
-    //   return this.categoryList;
-    // }
+          return data;
+        })
+      )
   }
 
+  // getProductCategories() {
+  //   return this.getProductData().pipe(
+  //     map((data) => [...new Set(data.map((obj) => obj.category))])
+  //   ); 
+  // }
+
+   
   getProuductByCategory(category: string) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.category === category))
     );
   }
-  getProductColors() {
-    return this.getProductData().pipe(
-      map((data) => [...new Set(data.map((obj) => obj.color))])
-    );
-  }
+  // getProductColors() {
+  //   return this.getProductData().pipe(
+  //     map((data) => [...new Set(data.map((obj) => obj.color))])
+  //   );
+  // }
+  
   getProuductByColor(color: string) {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.color === color))
@@ -92,6 +87,14 @@ export class ProductService {
     return this.getProductData().pipe(
       map((data) => data.filter((res) => res.id === pid))
     );
+  }
+
+  // Delete
+  delete(id: any) {
+    var API_URL = `${this.jsonfilePath}/${id}`;
+    return this.http.delete(API_URL).pipe(
+      catchError(this.errorHandler)
+    )
   }
 
   errorHandler(error:any) {
