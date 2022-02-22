@@ -140,3 +140,22 @@ form .form-control{
 .widget-desc ul{ padding-left: 0;}
 .widget-desc ul li{ margin-right: 5px;}
 .menu-list .menu-content{padding-left: 0;}
+.action-btn > a{
+  background:#ff084e;
+  border-radius:30px;
+  color:#fff;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align: center;
+}
+.action-btn .ti-pencil, .action-btn .ti-trash{
+  cursor:pointer;
+  color: #fff;
+    font-size: 20px;
+    line-height: 36px;
+}
+.action-btn .ti-pencil{
+  color:#000;
+}

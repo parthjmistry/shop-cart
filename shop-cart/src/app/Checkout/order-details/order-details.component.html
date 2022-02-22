@@ -1,12 +1,33 @@
 <div class="cart-page-heading">
-    <h5>Your Order</h5>
-    <p>The Details</p>
+  <h5>Your Order</h5>
+  <p>The Details</p>
 </div>
 
 <ul class="order-details-form mb-4">
-    <li><span>Product</span> <span>Total</span></li>
-    <li><span>Cocktail Yellow dress</span> <span>$59.90</span></li>
-    <li><span>Subtotal</span> <span>$59.90</span></li>
-    <li><span>Shipping</span> <span>Free</span></li>
-    <li><span>Total</span> <span>$59.90</span></li>
+  <li><span><strong>Product</strong></span> <span><strong>Total</strong></span></li>
+
+  <div *ngFor="let cartItem of CartItems">
+    <li>
+      <span>{{ cartItem.name }}</span>
+      <span>
+        <strong>
+          $ {{ cartItem.price * cartItem.Qty | number: "1.0-2" }}
+        </strong></span
+      >
+    </li>
+  </div>
+
+  <li>
+    <span><strong>Subtotal</strong></span>
+    <span style="font-size: medium"
+      ><strong>${{ CartItemAmount | number: "1.0-2" }}</strong></span
+    >
+  </li>
+  <li><span><strong>Shipping</strong></span><strong><span>Free</span></strong></li>
+  <li>
+    <span><strong>Total</strong></span>
+    <span style="font-size: medium"
+      ><strong>${{ CartItemAmount | number: "1.0-2" }}</strong></span
+    >
+  </li>
 </ul>
