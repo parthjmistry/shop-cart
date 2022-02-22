@@ -42,37 +42,45 @@ export class UserAddComponent implements OnInit {
     if (this.userAdd.invalid) {
         return;
     }
-debugger;
-    if(this.modalService.config.initialState == undefined){
+    if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
+      this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
+      this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
+      const updatedData = this.updatedArray.map(x => (x.UserId === this.userId ? 
+        { 
+          UserId : this.userAdd.value.UserId, 
+          FirstName : this.userAdd.value.FirstName, 
+          LastName : this.userAdd.value.LastName, 
+          PhoneNo : this.userAdd.value.PhoneNo, 
+          Email : this.userAdd.value.Email, 
+          password : this.userAdd.value.password, 
+          confPassword : this.userAdd.value.confPassword 
+        } : x));
+      localStorage.setItem('userList', JSON.stringify(updatedData))
+      this.modalService.config.initialState = undefined;
+      this._bsModalRef.hide();
+      this.reloadCurrentRoute();  
+    }
+    else{
         this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
         this.updatedArray.push(this.userAdd.value);
         localStorage.setItem('userList', JSON.stringify(this.updatedArray))
         this._bsModalRef.hide();
-    }
-    else{
-      this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
-      this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
-      const objIndex = this.updatedArray.findIndex((obj => obj.UserId == this.userId));
-      
-      this.updatedArray[objIndex] = this.userAdd.value
-      //localStorage.setItem('userList', JSON.stringify(this.updatedArray[objIndex]))
-      this._bsModalRef.hide();
-      
     }    
     
   }
   public onCancel(): void {
+    this.modalService.config.initialState = undefined;
     this._bsModalRef.hide();
 }
 onReset() {
   this.submitted = false;
   this.userAdd.reset();
 }
-// reloadCurrentRoute() {
-//   let currentUrl = this.route.url;
-//       this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-//       this.route.onSameUrlNavigation = 'reload';
-//       this.route.navigate([currentUrl]);
-//   }
+reloadCurrentRoute() {
+  let currentUrl = this.route.url;
+      this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.route.onSameUrlNavigation = 'reload';
+      this.route.navigate([currentUrl]);
+  }
   
 }
