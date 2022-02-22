@@ -136,3 +136,22 @@ form .form-control{
 .modal{
   background:rgba(0,0,0,0.7);
 }
+.action-btn > a{
+  background:#ff084e;
+  border-radius:30px;
+  color:#fff;
+  width:36px;
+  height:36px;
+  line-height:36px;
+  display:inline-block;
+  text-align: center;
+}
+.action-btn .ti-pencil, .action-btn .ti-trash{
+  cursor:pointer;
+  color: #fff;
+    font-size: 20px;
+    line-height: 36px;
+}
+.action-btn .ti-pencil{
+  color:#000;
+}

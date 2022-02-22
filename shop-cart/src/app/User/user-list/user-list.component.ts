@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { UserViewModel } from 'src/app/Model/user-view-model';
+import { User, UserViewModel } from 'src/app/Model/user-view-model';
 import { UserService } from 'src/app/Service/user.service';
 import { UserAddComponent } from '../user-add/user-add.component';
 @Component({
@@ -11,8 +12,11 @@ import { UserAddComponent } from '../user-add/user-add.component';
 })
 export class UserListComponent implements OnInit {
   modalRef: BsModalRef | undefined;
+  update : User[] = [];
+  UserList : UserViewModel[] = [];
+  userAdd: FormGroup | any;
   constructor(private userService : UserService, private router : Router,private modalService: BsModalService) { }
-  UserList : UserViewModel[] = []
+  
   
   ngOnInit(): void {
     this.getUserList();
@@ -38,11 +42,23 @@ export class UserListComponent implements OnInit {
   }
   
  }
- updateUser(userId : number){
-  this.modalRef = this.modalService.show(UserAddComponent);
- }
+ 
   OpenModalAddUser() {
     this.modalRef = this.modalService.show(UserAddComponent);
     this.modalService.onHidden.subscribe(result => { this.getUserList()})
+  }
+
+  UpdateUser(userId : number) {
+     this.update = this.UserList.filter(item => item.UserId == userId);
+     this.userAdd  = {
+      UserId: this.update[0].UserId,
+      FirstName : this.update[0].FirstName,
+      LastName : this.update[0].LastName,
+      Email : this.update[0].Email,
+      PhoneNo: this.update[0].PhoneNo,
+      password: '',
+      confPassword: ''
+    };
+    this.modalRef = this.modalService.show(UserAddComponent, { initialState : this.userAdd });
   }
 }
