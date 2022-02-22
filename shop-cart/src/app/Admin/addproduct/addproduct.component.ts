@@ -41,7 +41,7 @@ export class AddproductComponent implements OnInit {
       return;
     }
 
-    console.log(this.productForm.value);
+    //console.log(this.productForm.value);
 
     this.productService.addProduct(this.productForm.value).subscribe((res) => {
       //console.log(this.productForm.value);

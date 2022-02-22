@@ -12,9 +12,8 @@ export class HeaderComponent implements OnInit {
   userName: string = '';
   subscription: Subscription;
   logged: boolean = false;
-  localCartItemCount: number = 0;
-  localCartItemPrice: number = 0;
-  public CartItemCnt : any;
+  CartItemCount: number = 0;
+  CartItemAmount: number = 0;
 
   constructor(
     private messageService: MessageServiceService,
@@ -27,20 +26,17 @@ export class HeaderComponent implements OnInit {
       }
     });
 
-    const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
-    for (let i = 0; i < currentArray.length; ++i) {
-      this.localCartItemCount += currentArray[i].Qty;
-      this.localCartItemPrice += currentArray[i].Qty * currentArray[i].price;
-    }
-  }
-  ngOnInit(): void {
-    this.CartItemCnt = this.cartService.GetCartItemCount();
+    this.cartService.cartItemCount.subscribe((itemCount) => {
+      this.CartItemCount = itemCount;
+    });
 
-    // const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
-    // for (let i = 0; i < currentArray.length; ++i) {
-    //   this.localCartItemCount += currentArray[i].Qty;
-    // }
+    this.cartService.cartItemAmount.subscribe((itemAmt) => {
+      this.CartItemAmount = itemAmt;
+    });
   }
+
+  ngOnInit(): void {}
+
   btnLogout() {
     this.logged = false;
     this.userName = '';

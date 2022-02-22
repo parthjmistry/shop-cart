@@ -17,12 +17,12 @@ export class CartItemsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private CartService: CartServiceService
-  ) {}
+    private _cartService: CartServiceService
+  ) {
+  }
 
   ngOnInit(): void {
     this.CartItems = JSON.parse(localStorage.getItem('cartItem') || '{}');
-    console.log(this.CartItems);
   }
 
   EditItem(Action: string, ProdutId: number) {
@@ -37,6 +37,7 @@ export class CartItemsComponent implements OnInit {
     }
 
     localStorage.setItem('cartItem', JSON.stringify(this.CartItems));
+    this._cartService.setCartItemCount();
   }
 
   deleteCartItem(itemId: number) {
@@ -48,11 +49,13 @@ export class CartItemsComponent implements OnInit {
         }
       }
       localStorage.setItem('cartItem', JSON.stringify(currentArray));
+      this._cartService.setCartItemCount();
     }
   }
 
   ClearCart() {
     localStorage.removeItem('cartItem');
+    this._cartService.setCartItemCount();
     this.reloadComponent();
   }
 
