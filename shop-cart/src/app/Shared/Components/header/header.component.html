@@ -26,6 +26,7 @@
                         <div class="header-cart-menu d-flex align-items-center ml-auto">
                             <!-- Cart Area -->
                             <div class="cart">
+                                <a [routerLink]="['/cart']" id="header-cart-btn" ><span class="cart_quantity">{{CartItemCount}}</span> <i class="ti-bag"></i> Your Bag ${{CartItemAmount | number : "1.0-2" }}</a>
                                 <a id="header-cart-btn" [routerLink]="['/cart']"><span class="cart_quantity">{{CartItemCount}}</span> <i class="ti-bag"></i> Your Bag ${{CartItemAmount | number : "1.0-2" }}</a>
                                 <!-- Cart List Area Start -->
                                 <ul class="cart-list">
@@ -93,7 +94,7 @@
                     </div>
                     <!-- Help Line -->
                     <div class="help-line">
-                        <a href="tel:+346573556778"><i class="ti-headphone-alt"></i> +34 657 3556 778</a>
+                        <a href="#"><i class="ti-headphone-alt"></i> +34 657 3556 778</a>
                     </div>
                 </div>
             </div>
