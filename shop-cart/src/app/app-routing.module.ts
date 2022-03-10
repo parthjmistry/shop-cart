@@ -5,9 +5,10 @@ import { ListproductComponent } from './Admin/listproduct/listproduct.component'
 import { CartComponent } from './Cart/cart/cart.component';
 import { CheckoutComponent } from './Checkout/checkout/checkout.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
+import { AuthGuard } from './Core/Services/auth.guard';
 import { ProductDetailComponent } from './Product/product-detail/product-detail.component';
 import { ProductListComponent } from './Product/product-list/product-list.component';
-import { AuthGuard } from './Service/auth.guard';
+
 import { LoginComponent } from './User/login/login.component';
 import { ResetPasswordComponent } from './User/reset-password/reset-password.component';
 import { SignUpComponent } from './User/sign-up/sign-up.component';

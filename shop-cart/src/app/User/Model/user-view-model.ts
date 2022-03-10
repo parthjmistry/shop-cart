@@ -5,7 +5,8 @@ export interface UserViewModel {
     Email :string,
     PhoneNo : string,
     password: string,
-    confPassword: string
+    confPassword: string,
+    DOB : Date
 }
 export class User
 {
@@ -14,4 +15,5 @@ export class User
     LastName : string = '';
     Email : string = '';
     PhoneNo : string = '';
+    DOB : Date = new Date()
 }

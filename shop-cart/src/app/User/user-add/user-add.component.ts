@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { MustMatch } from 'src/app/Helpers/must-match-validator';
-import { User } from 'src/app/Model/user-view-model';
+import { User, UserViewModel } from 'src/app/User/Model/user-view-model';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -16,18 +16,38 @@ export class UserAddComponent implements OnInit {
   emailPattern : any;
   updatedArray : User[] = [];
   userId : number = 0;
-  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService ) {}
+  isEditMode : boolean = false;
+  datepipe: any;
+  listuser : UserViewModel[] = []
+  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService ) {
+    debugger;
+    if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
+      this.isEditMode = true;
+    }
+    else{
+      this.isEditMode = false;
+    }
+  }
   
   ngOnInit(): void {
+    debugger;
+    if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
+      this.isEditMode = true;
+    }
+    else{
+      this.isEditMode = false;
+    }
+
     this.emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
     this.userAdd = this.fb.group({
-      UserId : this.modalService.config.initialState != null ? this.modalService.config.initialState['UserId'] : Math.floor((Math.random() * 10000) + 1),
+      UserId : this.modalService.config.initialState != null && this.modalService.config.initialState['UserId'] != null ? this.modalService.config.initialState['UserId'] : Math.floor((Math.random() * 10000) + 1),
       FirstName : [this.modalService.config.initialState != null ? this.modalService.config.initialState['FirstName'] : '' , Validators.required],
       LastName: [this.modalService.config.initialState != null ? this.modalService.config.initialState['LastName'] : '', Validators.required],
-      password :['', [Validators.required]],
-      confPassword : ['', Validators.required],
+      password :['', !this.isEditMode ? [Validators.required] : ''],
+      confPassword : ['', !this.isEditMode ? [Validators.required] : ''],
       Email: [this.modalService.config.initialState != null ? this.modalService.config.initialState['Email'] : '', [Validators.required, Validators.pattern(this.emailPattern)]],
-      PhoneNo: [this.modalService.config.initialState != null ? this.modalService.config.initialState['PhoneNo'] : '', Validators.required]
+      PhoneNo: [this.modalService.config.initialState != null ? this.modalService.config.initialState['PhoneNo'] : '', Validators.required],
+      DOB: [this.modalService.config.initialState != null ? this.modalService.config.initialState['DOB'] : '', Validators.required]
      }, {
       validator: MustMatch('password', 'confPassword')
   });
@@ -39,10 +59,11 @@ export class UserAddComponent implements OnInit {
   FormSubmit(){
     this.submitted = true;
 
-    if (this.userAdd.invalid) {
+    if (this.userAdd.invalid && this.userExists(this.userAdd.value.Email)) {
         return;
     }
     if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
+      
       this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
       this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
       const updatedData = this.updatedArray.map(x => (x.UserId === this.userId ? 
@@ -52,8 +73,8 @@ export class UserAddComponent implements OnInit {
           LastName : this.userAdd.value.LastName, 
           PhoneNo : this.userAdd.value.PhoneNo, 
           Email : this.userAdd.value.Email, 
-          password : this.userAdd.value.password, 
-          confPassword : this.userAdd.value.confPassword 
+          DOB : this.userAdd.value.DOB
+
         } : x));
       localStorage.setItem('userList', JSON.stringify(updatedData))
       this.modalService.config.initialState = undefined;
@@ -61,6 +82,7 @@ export class UserAddComponent implements OnInit {
       this.reloadCurrentRoute();  
     }
     else{
+      
         this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
         this.updatedArray.push(this.userAdd.value);
         localStorage.setItem('userList', JSON.stringify(this.updatedArray))
@@ -83,5 +105,10 @@ reloadCurrentRoute() {
       this.route.onSameUrlNavigation = 'reload';
       this.route.navigate([currentUrl]);
   }
-  
+  userExists(emailId : string) {
+    this.listuser = JSON.parse(localStorage.getItem('userList') as string);
+    return this.listuser.some(function(el: { Email: string; }) {
+      return el.Email === emailId;
+    }); 
+  }
 }
