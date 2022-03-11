@@ -14,7 +14,8 @@ export class UserService {
       Email : 'saurabh@aspen-it.com', 
       PhoneNo : '123456789', 
       password: '',
-      confPassword: '', 
+      confPassword: '',
+      DOB: new Date 
     },
     { 
       UserId : 2,
@@ -24,6 +25,7 @@ export class UserService {
       PhoneNo : '654987123',
       password: '',
       confPassword: '', 
+      DOB: new Date 
     },
     { 
       UserId : 3,
@@ -33,6 +35,7 @@ export class UserService {
       PhoneNo : '321654987',
       password: '',
       confPassword: '', 
+      DOB: new Date 
     },
     { 
       UserId : 4,
@@ -42,6 +45,7 @@ export class UserService {
       PhoneNo : '987654321',
       password: '',
       confPassword: '', 
+      DOB: new Date 
     },
     { 
       UserId : 5,
@@ -51,15 +55,17 @@ export class UserService {
       PhoneNo : '258369147',
       password: '',
       confPassword: '', 
+      DOB: new Date 
     },
     { 
       UserId : 6,
       FirstName : 'Hiren', 
-      LastName : 'Nayankpara', 
+      LastName : 'Nayakpara', 
       Email : 'hiten@aspen-it.com', 
       PhoneNo : '369258369',
       password: '',
       confPassword: '', 
+      DOB: new Date 
     },
   ];
   constructor() { }

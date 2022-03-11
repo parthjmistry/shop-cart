@@ -36,6 +36,9 @@ import { AddproductComponent } from './Admin/addproduct/addproduct.component';
 import { ListproductComponent } from './Admin/listproduct/listproduct.component';
 import { NgxPaginationModule } from 'ngx-pagination';
  
+import { DataTablesModule } from 'angular-datatables';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,10 +78,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
     
+    DataTablesModule, 
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [
+  providers: [BsDatepickerConfig
   ],
   bootstrap: [AppComponent]
 })

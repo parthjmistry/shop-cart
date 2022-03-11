@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { UserViewModel } from 'src/app/Model/user-view-model';
-import { UserService } from 'src/app/Service/user.service';
+import { UserViewModel } from 'src/app/User/Model/user-view-model';
+import { UserService } from '../Service/user.service';
+
 
 @Component({
   selector: 'app-user-details',

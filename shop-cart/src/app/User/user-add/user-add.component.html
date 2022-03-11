@@ -1,10 +1,11 @@
+
 <div class="login_area section_padding_10">
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-12 ml-md-auto mr-md-auto">
         <div class="login-popup-wrapper">
           <div class="modal-header">
-            <h5>Add User</h5>
+            <h5>{{isEditMode == true ? 'Edit User' : 'Add User'}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -23,12 +24,13 @@
                 <input type="text" name="Email" formControlName="Email" placeholder="Email" class = "form-control" [pattern]="emailPattern"
                     [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" required>
             </div>
-            <div class="form-group">
+            
+            <div class="form-group" *ngIf="!isEditMode">
                 <input type="password"  name="password" formControlName="password" placeholder="Password" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
 
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="!isEditMode">
                 <input type="password"  name="confPassword" formControlName="confPassword" placeholder="Confirm Password" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }" required>
                     <div *ngIf="f.confPassword.errors.mustMatch"></div>
@@ -37,10 +39,15 @@
                 <input type="text" name="PhoneNo" formControlName="PhoneNo" placeholder="Phone Number" class = "form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.PhoneNo.errors }" required>
             </div>
+            <div class="form-group">
+                <input type="text" placeholder="Date of Birth" name="DOB" formControlName="DOB" class="form-control"  bsDatepicker [bsConfig]="{ isAnimated: true }">
+            </div>
+            
         </div>
             <div class="modal-footer">
                 <div class="text-left">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    
+                    <button type="submit" class="btn btn-primary">{{isEditMode == true ? 'Update' : 'Save'}} </button>
                     &nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-primary" (click)="onReset()">Reset</button>
                 </div>
