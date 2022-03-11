@@ -29,9 +29,12 @@
                 </div>
                 <!-- Product Description -->
                 <div class="product-description">
-                  <h4 class="product-price">${{ product.price }}</h4>
-                  <a
-                    routerLink="/product-details/{{ product.id }}"
+                  <p style="text-transform: uppercase; font-weight: 400; text-align: center;">{{ product.category }}</p>
+                  <div style="width: 100%;display: inline-block;" >
+                    <h4 class="product-price" style="width: 80%; float: left;">${{ product.price }}</h4>
+                    <p [ngStyle]="getColorStyle(product.color)">&nbsp;</p>
+                  </div>
+                  <a routerLink="/product-details/{{ product.id }}"
                     ><p [innerText]="product.name"></p
                   ></a>
 
@@ -42,6 +45,7 @@
                     (click)="addToCart(product.id)"
                     >ADD TO CART</a
                   >
+                  
                 </div>
               </div>
             </div>

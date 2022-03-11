@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  OnInit} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 import { MessageServiceService } from 'src/app/Service/message-service.service';
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   logged: boolean = false;
   CartItemCount: number = 0;
   CartItemAmount: number = 0;
-
+ 
   constructor(
     private messageService: MessageServiceService,
     private cartService: CartServiceService

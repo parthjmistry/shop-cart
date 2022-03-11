@@ -15,6 +15,13 @@ export class AddproductComponent implements OnInit {
 
   isEdit: boolean = false;
 
+  
+  categoryList: string[] = [];
+  colorList: string[] = [];
+  seletedCategory = '';
+
+  seletedColor = '';
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -46,7 +53,7 @@ export class AddproductComponent implements OnInit {
       category: [
         this.modalService.config.initialState != null
           ? this.modalService.config.initialState['category']
-          : '',
+          : "",
         Validators.required,
       ],
       color: [
@@ -71,6 +78,9 @@ export class AddproductComponent implements OnInit {
     } else {
       this.isEdit = false;
     }
+
+    this.getCategoryList();
+    this.getColorList();
   }
 
   get f() {
@@ -116,4 +126,18 @@ export class AddproductComponent implements OnInit {
     this.submitted = false;
     this.productForm.reset();
   }
+
+  
+  getCategoryList() {
+    this.productService.getProductCategoryList().subscribe((data) => {
+      this.categoryList = data;
+    });
+  }
+
+  getColorList() {
+    this.productService.getProductColorList().subscribe((data) => {
+      this.colorList = data;
+    });
+  }
+
 }

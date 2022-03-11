@@ -34,7 +34,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { AddproductComponent } from './Admin/addproduct/addproduct.component';
 import { ListproductComponent } from './Admin/listproduct/listproduct.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +66,7 @@ import { ListproductComponent } from './Admin/listproduct/listproduct.component'
     UserAddComponent,
     AddproductComponent,
     ListproductComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,9 @@ import { ListproductComponent } from './Admin/listproduct/listproduct.component'
     NgbModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    HttpClientModule 
+    HttpClientModule,
+    NgxPaginationModule
+    
   ],
   providers: [
   ],

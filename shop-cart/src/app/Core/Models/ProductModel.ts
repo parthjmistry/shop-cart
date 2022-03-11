@@ -11,4 +11,9 @@ export interface Product {
     category: string;
     color:string;
 }
+
+export interface ProductFilters { 
+    category: string[] ;
+    color:string[];
+}
  

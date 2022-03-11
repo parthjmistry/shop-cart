@@ -19,6 +19,7 @@ export class ListproductComponent implements OnInit {
 
   productUpdate!: Product;
 
+  p: number = 1;
   constructor(
     private productService: ProductService,
     private router: Router,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartModel } from 'src/app/Cart/Models/cart-model';
 import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
-import { Product } from 'src/app/Core/Models/ProductModel';
+import { Product, ProductFilters } from 'src/app/Core/Models/ProductModel';
 import { ProductService } from 'src/app/Core/Services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,11 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductListComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
-  categoryName: string = '';
-  colorName: string = '';
   productList: Product[] = [];
-
-  //cartData =  JSON.parse(localStorage.getItem('cartItem'));
 
   cartData = (() => {
     const fieldValue = localStorage.getItem('cartItem');
@@ -30,51 +26,45 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private _cartService: CartServiceService
   ) {
-    // subscribe category name from subject
-    this.productService.categoryName.subscribe((res: string) => {
-      this.categoryName = res;
-      if (res != '') {
-        this.getProuductByCategory(res);
+    // subscribe the product filters
+    this.productService.productFilterCriteria$.subscribe((data) => {
+      if (data.category.length > 0 || data.color.length > 0) {
+        this.getProductByFilters(data);
+      } else {
+        this.getProductList();
       }
     });
-
-    this.productService.colorName.subscribe((res: string) => {
-      this.colorName = res;
-      // console.log(res);
-      if (res != '') {
-        this.getProuductByColor(res);
-      }
-    });
-
-    if (!this.categoryName && !this.colorName) {
-      this.getProductList();
-    }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProductList();
+  }
 
   getProductList() {
     this.productService.getProductData().subscribe((data) => {
-      //console.log(data);
       this.productList = data;
     });
   }
 
-  getProuductByCategory(category: string) {
+  getProductByFilters(productFilters: ProductFilters) {
     this.productService
-      .getProuductByCategory(this.categoryName)
+      .getProductByFilterData(productFilters)
       .subscribe((data) => {
-        //console.log(data);
         this.productList = data;
       });
   }
-  getProuductByColor(color: string) {
-    this.productService.getProuductByColor(color).subscribe((data) => {
-      //console.log(data);
-      this.productList = data;
-    });
+  getColorStyle(color: string) {
+    let colorStyles = {
+      'background-color': color,
+      'box-shadow': '0px 0px 0px 2px ' + color,
+      'box-sizing': 'border-box',
+      border: '2px solid #fff',
+      'border-radius': '50%',
+      width: '25px',
+      float: 'right',
+    };
+    return colorStyles;
   }
-
   addToCart(pid: number) {
     this.productService.getProuductById(pid).subscribe((data) => {
       const itemId = data[0].id;
@@ -92,7 +82,6 @@ export class ProductListComponent implements OnInit {
       localStorage.setItem('cartItem', JSON.stringify(this.cartData));
       alert(data[0].name + ' added in cart.');
       this._cartService.setCartItemCount();
-
     });
   }
 }
