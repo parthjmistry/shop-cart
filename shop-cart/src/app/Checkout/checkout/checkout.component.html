@@ -1,22 +1,23 @@
 <div class="checkout_area section_padding_100">
     <div class="container">
         <div class="row">
-
             <div class="col-12 col-md-6">
                <app-billing-details></app-billing-details>
             </div>
-
             <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
                 <div class="order-details-confirmation">
-
                     <app-order-details></app-order-details>
-
                     <app-payment-methods></app-payment-methods>
-
-                    <a href="#" class="btn karl-checkout-btn">Place Order</a>
+                    <div class="col-12 mb-4">
+                      <input
+                        type="button"
+                        class="btn karl-checkout-btn"
+                        value="Place Order"
+                        (click)="PlaceOrder()"
+                      />
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
