@@ -39,6 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductImageComponent } from './Admin/product-image/product-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserAddComponent,
     AddproductComponent,
     ListproductComponent,
+    ProductImageComponent,
 
   ],
   imports: [

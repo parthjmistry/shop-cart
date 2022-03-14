@@ -1,0 +1,52 @@
+<div class="login_area section_padding_10">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12 ml-md-auto mr-md-auto">
+        <div class="login-popup-wrapper">
+          <div class="modal-header">
+            <h5>Upload Product Images</h5>
+          </div>
+
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="col-md-3">
+                <input
+                  type="file"
+                  #file
+                  placeholder="Choose file"
+                  (change)="uploadFile(file.files)"
+                  style="display: none"
+                   
+                />
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="file.click()"
+                >
+                  Upload File
+                </button>
+              </div>
+            </div>
+          
+            <span class="upload" *ngIf="progress > 0">
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [ngStyle]="{ width: progress + '%' }"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {{ progress }}%
+                </div>
+              </div>
+            </span>
+            <span class="upload" *ngIf="message">
+              {{ message }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
