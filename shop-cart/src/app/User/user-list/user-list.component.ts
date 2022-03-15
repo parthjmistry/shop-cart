@@ -1,8 +1,11 @@
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { User, UserViewModel } from 'src/app/User/Model/user-view-model';
+import { DataTablesResponse, User, UserViewModel } from 'src/app/User/Model/user-view-model';
+import { HttpWrapService } from '../Service/http-wrap.service';
 import { UserService } from '../Service/user.service';
 import { UserAddComponent } from '../user-add/user-add.component';
 
@@ -12,63 +15,58 @@ import { UserAddComponent } from '../user-add/user-add.component';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  
   modalRef: BsModalRef | undefined;
   update : User[] = [];
-  userList : UserViewModel[] = [];
+  //userList : UserViewModel[] = [];
+  userList : any;
   userAdd: FormGroup | any;
   dtOptions: DataTables.Settings = {};
   
-  constructor(private userService : UserService, private router : Router,private modalService: BsModalService) { }
+
+  constructor(private router : Router,private modalService: BsModalService, public datepipe: DatePipe, private _userService: UserService) { }
   
   
   ngOnInit(): void {
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      serverSide : false,
+      //pagingType: 'full_numbers',
+      paging: true,
       pageLength: 5,
-      processing: true
+      //search : true,
+      //processing: true, 
+      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+   
     };
-    this.getUserList();
+    this.getUserList("CompanyUser", "Get");
   }
-  getUserList(){
-    if(localStorage.getItem('userList') === null)
-    {
-      const userObservable = this.userService.getUsers();
-          userObservable.subscribe((UserList: UserViewModel[]) => {
-            this.userList = UserList;
-            localStorage.setItem('userList', JSON.stringify(this.userList));
-          });
+  
+getUserList(controller: string, action: string) {
+    debugger;
+    return this._userService.getUserList<UserViewModel[]>(controller, action)
+    .subscribe(data => 
+      { 
+        console.log(data); this.userList = data
       }
-      else{
-        
-        this.userList = JSON.parse(localStorage.getItem('userList') as string);
-      }
-  }
+      );
+}
  deleteUser(userId : number, name : string): void{
   if(confirm("Are you sure to delete this user " + name)) {
-    this.userList = this.userList.filter(item => item.UserId !== userId);
-  localStorage.setItem('userList', JSON.stringify(this.userList));
+    this.userList = this.userList.filter((item: { UserId: number; }) => item.UserId !== userId);
+  //localStorage.setItem('userList', JSON.stringify(this.userList));
   }
   
  }
  
   OpenModalAddUser() {
+    debugger;
     this.modalRef = this.modalService.show(UserAddComponent);
-    this.modalService.onHidden.subscribe(result => { this.getUserList()})
+    this.modalService.onHidden.subscribe(result => { this.getUserList("CompanyUser", "Get")})
   }
 
   UpdateUser(userId : number) {
-
-     this.update = this.userList.filter(item => item.UserId == userId);
-     this.userAdd  = {
-      UserId: this.update[0].UserId,
-      FirstName : this.update[0].FirstName,
-      LastName : this.update[0].LastName,
-      Email : this.update[0].Email,
-      PhoneNo: this.update[0].PhoneNo,
-      password: '',
-      confPassword: '',
-      DOB : this.update[0].DOB
-    };
+    debugger;
+    this.userAdd = { UserId: userId}
     this.modalRef = this.modalService.show(UserAddComponent, { initialState : this.userAdd });
   }
 }

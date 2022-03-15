@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserViewModel } from '../Model/user-view-model';
+import { HttpWrapService } from './http-wrap.service';
 
 @Injectable({
   providedIn: 'root'
@@ -68,12 +69,25 @@ export class UserService {
       DOB: new Date 
     },
   ];
-  constructor() { }
+  constructor(private http : HttpWrapService) { }
   public getUsers(): any {
     const userObservable = new Observable(observer => {
                observer.next(this.userList);
     });
 
     return userObservable;
+}
+
+addUser(controller : string, action : string, postdata : any) {
+  debugger;
+  return this.http.post(controller, action, postdata)
+}
+
+getUserList<T>(controller : string, action : string) : Observable<T> {
+  return this.http.get<T>(controller, action)
+}
+
+getUserById<T>(controller : string, action : string, param : string) : Observable<T> {
+  return this.http.getById<T>(controller, action, param)
 }
 }

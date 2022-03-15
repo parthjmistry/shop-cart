@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { MustMatch } from 'src/app/Helpers/must-match-validator';
 import { User, UserViewModel } from 'src/app/User/Model/user-view-model';
+import { UserService } from '../Service/user.service';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -19,8 +20,9 @@ export class UserAddComponent implements OnInit {
   isEditMode : boolean = false;
   datepipe: any;
   listuser : UserViewModel[] = []
-  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService ) {
-    debugger;
+  userDetail! : UserViewModel;
+  
+  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService, private _userService : UserService, private router: Router ) {
     if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
       this.isEditMode = true;
     }
@@ -29,10 +31,14 @@ export class UserAddComponent implements OnInit {
     }
   }
   
-  ngOnInit(): void {
-    debugger;
+ngOnInit(): void {
+  debugger;
+  
     if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
       this.isEditMode = true;
+      
+      const updatedData = this.getUserById("CompanyUser", "GetUserById", "2");
+      console.log(updatedData);
     }
     else{
       this.isEditMode = false;
@@ -40,7 +46,7 @@ export class UserAddComponent implements OnInit {
 
     this.emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
     this.userAdd = this.fb.group({
-      UserId : this.modalService.config.initialState != null && this.modalService.config.initialState['UserId'] != null ? this.modalService.config.initialState['UserId'] : Math.floor((Math.random() * 10000) + 1),
+      UserId : this.modalService.config.initialState != null && this.modalService.config.initialState['UserId'] != null ? this.modalService.config.initialState['UserId'] : 0,
       FirstName : [this.modalService.config.initialState != null ? this.modalService.config.initialState['FirstName'] : '' , Validators.required],
       LastName: [this.modalService.config.initialState != null ? this.modalService.config.initialState['LastName'] : '', Validators.required],
       password :['', !this.isEditMode ? [Validators.required] : ''],
@@ -56,59 +62,83 @@ export class UserAddComponent implements OnInit {
   
   get f() { return this.userAdd.controls; }
 
-  FormSubmit(){
+FormSubmit(){
     this.submitted = true;
 
     if (this.userAdd.invalid && this.userExists(this.userAdd.value.Email)) {
         return;
     }
-    if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
-      
-      this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
-      this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
-      const updatedData = this.updatedArray.map(x => (x.UserId === this.userId ? 
-        { 
-          UserId : this.userAdd.value.UserId, 
-          FirstName : this.userAdd.value.FirstName, 
-          LastName : this.userAdd.value.LastName, 
-          PhoneNo : this.userAdd.value.PhoneNo, 
-          Email : this.userAdd.value.Email, 
-          DOB : this.userAdd.value.DOB
 
-        } : x));
-      localStorage.setItem('userList', JSON.stringify(updatedData))
-      this.modalService.config.initialState = undefined;
-      this._bsModalRef.hide();
-      this.reloadCurrentRoute();  
-    }
-    else{
+    return this._userService.addUser("CompanyUser", "CreateUser", this.userAdd.value).subscribe(
+      (res : any) => 
+      {
+        if(res == true){
+          this._bsModalRef.hide();
+        }
+      });
+
+    // if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
       
-        this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
-        this.updatedArray.push(this.userAdd.value);
-        localStorage.setItem('userList', JSON.stringify(this.updatedArray))
-        this._bsModalRef.hide();
-    }    
+    //   this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
+    //   this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
+    //   const updatedData = this.updatedArray.map(x => (x.UserId === this.userId ? 
+    //     { 
+    //       UserId : this.userAdd.value.UserId, 
+    //       FirstName : this.userAdd.value.FirstName, 
+    //       LastName : this.userAdd.value.LastName, 
+    //       PhoneNo : this.userAdd.value.PhoneNo, 
+    //       Email : this.userAdd.value.Email, 
+    //       DOB : this.userAdd.value.DOB
+
+    //     } : x));
+    //   localStorage.setItem('userList', JSON.stringify(updatedData))
+    //   this.modalService.config.initialState = undefined;
+    //   this._bsModalRef.hide();
+    //   this.reloadCurrentRoute();  
+    // }
+    // else{
+      
+    //     this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
+    //     this.updatedArray.push(this.userAdd.value);
+    //     localStorage.setItem('userList', JSON.stringify(this.updatedArray))
+    //     this._bsModalRef.hide();
+    // }    
     
   }
+
 onCancel(): void {
     this.modalService.config.initialState = undefined;
     this._bsModalRef.hide();
 }
+
 onReset() {
   this.submitted = false;
   this.userAdd.reset();
   this.modalService.config.initialState = undefined;
 }
+
 reloadCurrentRoute() {
   let currentUrl = this.route.url;
       this.route.routeReuseStrategy.shouldReuseRoute = () => false;
       this.route.onSameUrlNavigation = 'reload';
       this.route.navigate([currentUrl]);
-  }
-  userExists(emailId : string) {
+}
+
+userExists(emailId : string) {
     this.listuser = JSON.parse(localStorage.getItem('userList') as string);
     return this.listuser.some(function(el: { Email: string; }) {
       return el.Email === emailId;
     }); 
   }
+
+  getUserById(controller: string, action: string, param : string) {
+    debugger;
+    return this._userService.getUserById<UserViewModel>(controller, action, param)
+    .subscribe(data => 
+      { 
+        this.userDetail = data;
+        //console.log(data); this.userList = data
+      }
+      );
+}
 }

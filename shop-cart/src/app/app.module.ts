@@ -37,6 +37,7 @@ import { ListproductComponent } from './Admin/listproduct/listproduct.component'
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [BsDatepickerConfig
+  providers: [BsDatepickerConfig, DatePipe
   ],
   bootstrap: [AppComponent]
 })

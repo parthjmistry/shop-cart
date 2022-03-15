@@ -17,3 +17,9 @@ export class User
     PhoneNo : string = '';
     DOB : Date = new Date()
 }
+export class DataTablesResponse {
+    data?: any[];
+    draw?: number;
+    recordsFiltered?: number;
+    recordsTotal?: number;
+}
