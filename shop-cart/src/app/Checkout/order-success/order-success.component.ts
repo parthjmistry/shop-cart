@@ -16,6 +16,7 @@ export class OrderSuccessComponent implements OnInit {
     this.billingDetails = this._cartService.UserBillingDetails.subscribe(
       (data) => {
         this.billingDetails = JSON.stringify(data);
+        console.log(data);
         console.log(this.billingDetails);
       }
     );
