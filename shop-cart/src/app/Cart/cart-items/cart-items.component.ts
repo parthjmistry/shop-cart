@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CartModel } from '../Models/cart-model';
 import { CartModelNew } from '../Models/cart-model';
 import { CartServiceService } from '../Services/cart-service.service';
 
@@ -18,8 +16,7 @@ export class CartItemsComponent implements OnInit {
   constructor(
     private router: Router,
     private _cartService: CartServiceService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.CartItems = JSON.parse(localStorage.getItem('cartItem') || '{}');
@@ -61,8 +58,8 @@ export class CartItemsComponent implements OnInit {
 
   reloadComponent() {
     let currentUrl = this.router.url;
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate([currentUrl]);
-    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+  }
 }

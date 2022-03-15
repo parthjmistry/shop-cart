@@ -34,10 +34,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { AddproductComponent } from './Admin/addproduct/addproduct.component';
 import { ListproductComponent } from './Admin/listproduct/listproduct.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+ 
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
+import { ProductImageComponent } from './Admin/product-image/product-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +71,8 @@ import { DatePipe } from '@angular/common';
     UserAddComponent,
     AddproductComponent,
     ListproductComponent,
+    ProductImageComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,8 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     HttpClientModule,
+    NgxPaginationModule,
+    
     DataTablesModule, 
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule

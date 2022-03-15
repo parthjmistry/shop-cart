@@ -9,13 +9,13 @@
           <li
             data-toggle="collapse"
             data-target="#man2"
-            class="collapsed"
-            *ngFor="let catagory of categoryList">
+            class="collapsed {{!this.productFilters.category.includes(category)? '': 'active'}}"
+            *ngFor="let category of categoryList">
              
             <a
               href="javascript:void(0);"
-              [innerText]="catagory | titlecase"
-              (click)="getProductByCategory(catagory)"
+              [innerText]="category | titlecase"
+              (click)="getProductByFilter('category', category)"
             ></a>
           </li>
         </ul>
@@ -28,11 +28,11 @@
     <div class="widget-desc">
       <ul class="d-flex justify-content-between">
 
-        <li
-            *ngFor="let color of colorList">
+        <li *ngFor="let color of colorList">
              
-            <a [ngStyle]="{ 'background-color': color }"
-              href="javascript:void(0);" (click)="getProductByColor(color)"
+            <a [ngStyle]="getColorStyle(color)"
+              href="javascript:void(0);" 
+              (click)="getProductByFilter('color', color)"
             ></a>
           </li>
       </ul>

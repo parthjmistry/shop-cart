@@ -27,11 +27,17 @@
           <td>${{ product.price }}</td>
 
           <td>
-            <a href="javascript:void(0)" (click)="updateProduct(product.id)"
+            <a
+              href="javascript:void(0)" title="Upload Product Image"
+              (click)="AddProductImageModal(product.id)"
+              ><i class="ti ti-upload"></i>
+            </a>
+            &nbsp; &nbsp;
+            <a href="javascript:void(0)" (click)="updateProduct(product.id)" title="Edit Product"
               ><i class="ti-pencil" aria-hidden="true"></i
             ></a>
             &nbsp; &nbsp;
-            <a href="javascript:void(0)" (click)="deleteProduct(product.id)">
+            <a href="javascript:void(0)" (click)="deleteProduct(product.id)" title="Remove Product" >
               <i class="ti-trash" aria-hidden="true"></i
             ></a>
           </td>

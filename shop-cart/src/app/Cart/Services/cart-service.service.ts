@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { CartModel } from '../Models/cart-model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +10,15 @@ export class CartServiceService {
   TotalCartAmt: number = 0;
   TotalCartItem: number = 0;
 
+  scope: [] = [];
+
   setCartItemCount() {
     this.TotalCartAmt = 0;
     this.TotalCartItem = 0;
 
     const currentArray = JSON.parse(localStorage.getItem('cartItem') || '{}');
 
-    console.log(currentArray);
-
     if (currentArray.length != undefined) {
-      console.log('currentArray');
       for (let i = 0; i < currentArray.length; ++i) {
         this.TotalCartAmt += currentArray[i].Qty * currentArray[i].price;
       }
@@ -35,36 +33,11 @@ export class CartServiceService {
     this.setCartItemCount();
   }
 
-  private _Cart = new BehaviorSubject<CartModel[]>([]);
-  readonly Products$ = this._Cart.asObservable();
-
-  private Products: CartModel[] = [];
-  private nextId = 0;
-
-  GetCartItems() {
-    this._Cart.next(this.Products);
+  getScope() {
+    return this.scope;
   }
 
-  AddItemToCart(item: CartModel) {
-    debugger;
-    let newId = ++this.nextId;
-    console.log(newId);
-    item.Id = newId;
-    item.Name = 'Product ' + newId;
-    item.Qty = 1;
-    item.Price = newId * 100;
-    item.Amount = item.Qty * item.Price;
-
-    this.Products.push(item);
-    this._Cart.next(this.Products);
-  }
-
-  RemoveItemFromCart(id: number) {
-    this.Products.forEach((t, i) => {
-      if (t.Id === id) {
-        this.Products.splice(i, 1);
-      }
-      this._Cart.next(Object.assign([], this.Products));
-    });
+  setScope(scope: any){
+      this.scope = scope;
   }
 }

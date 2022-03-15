@@ -148,10 +148,19 @@
       "name": "Product 3",
       "description": "sldflasdfasj tesljtsjdf",
       "price": 10,
-      "category": "business",
-      "color": "red",
+      "category": "accessories",
+      "color": "blue",
       "img": "product-3.jpg",
       "id": 18
+    },
+    {
+      "name": "Product 11",
+      "description": "test description",
+      "price": 100.25,
+      "category": "scifi",
+      "color": "gray",
+      "img": "product-1.jpg",
+      "id": 19
     }
   ]
 }
