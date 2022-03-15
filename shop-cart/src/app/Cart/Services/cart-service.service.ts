@@ -10,6 +10,8 @@ export class CartServiceService {
   TotalCartAmt: number = 0;
   TotalCartItem: number = 0;
 
+  scope: [] = [];
+
   setCartItemCount() {
     this.TotalCartAmt = 0;
     this.TotalCartItem = 0;
@@ -29,5 +31,13 @@ export class CartServiceService {
 
   constructor() {
     this.setCartItemCount();
+  }
+
+  getScope() {
+    return this.scope;
+  }
+
+  setScope(scope: any){
+      this.scope = scope;
   }
 }

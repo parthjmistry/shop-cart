@@ -1,23 +1,208 @@
 <div class="checkout_area section_padding_100">
     <div class="container">
+        <form [formGroup]="frmgrpBillingDetails" (ngSubmit)="SubmitBillingDetails()">
         <div class="row">
+           
             <div class="col-12 col-md-6">
-               <app-billing-details></app-billing-details>
+                <div class="checkout_details_area mt-50 clearfix">
+                    <div class="cart-page-heading">
+                      <h5>Billing Address</h5>
+                      <p>Enter your cupone code</p>
+                    </div>
+                  
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="firstName">First Name <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="firstName"
+                            id="firstName"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                                (frmgrpBillingDetails.controls['firstName'].invalid && (frmgrpBillingDetails.controls['firstName'].dirty || frmgrpBillingDetails.controls['firstName'].touched))
+                                 || (IsFormValid == false && frmgrpBillingDetails.controls['firstName'].untouched)
+                            }"
+                            required
+                          />
+                        </div>
+                  
+                        <div class="col-md-6 mb-3">
+                          <label for="lastName">Last Name <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="lastName"
+                            id="lastName"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['lastName'].invalid && (frmgrpBillingDetails.controls['lastName'].dirty || frmgrpBillingDetails.controls['lastName'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['lastName'].untouched)
+                            }"
+                            required
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="phoneNumber">Phone</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="phoneNumber"
+                            id="phoneNumber"
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['phoneNumber'].invalid && (frmgrpBillingDetails.controls['phoneNumber'].dirty || frmgrpBillingDetails.controls['phoneNumber'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['phoneNumber'].untouched)
+                            }"
+                            value=""
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-4">
+                          <label for="email_address">Email Address <span>*</span></label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            formControlName="emailAddress"
+                            id="emailAddress"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['emailAddress'].invalid && (frmgrpBillingDetails.controls['emailAddress'].dirty || frmgrpBillingDetails.controls['emailAddress'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['emailAddress'].untouched)
+                            }"
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="streetAddress">Address <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control mb-3"
+                            formControlName="streetAddress"
+                            id="streetAddress"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['streetAddress'].invalid && (frmgrpBillingDetails.controls['streetAddress'].dirty || frmgrpBillingDetails.controls['streetAddress'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['streetAddress'].untouched)
+                            }"
+                          />
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="streetAddress2"
+                            id="streetAddress2"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['streetAddress2'].invalid && (frmgrpBillingDetails.controls['streetAddress2'].dirty || frmgrpBillingDetails.controls['streetAddress2'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['streetAddress2'].untouched)
+                            }"
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="country">Country <span>*</span></label>
+                          <select
+                            class="custom-select d-block w-100"
+                            id="country"
+                            formControlName="country"
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['country'].invalid && (frmgrpBillingDetails.controls['country'].dirty || frmgrpBillingDetails.controls['country'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['country'].untouched)
+                            }"
+                          >
+                            <option value="usa">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="ger">Germany</option>
+                            <option value="fra">France</option>
+                            <option value="ind">India</option>
+                            <option value="aus">Australia</option>
+                            <option value="bra">Brazil</option>
+                            <option value="cana">Canada</option>
+                          </select>
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="state">Province <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="state"
+                            id="state"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['state'].invalid && (frmgrpBillingDetails.controls['state'].dirty || frmgrpBillingDetails.controls['state'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['state'].untouched)
+                            }"
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="city">Town/City <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="city"
+                            id="city"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['city'].invalid && (frmgrpBillingDetails.controls['city'].dirty || frmgrpBillingDetails.controls['city'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['city'].untouched)
+                            }"
+                          />
+                        </div>
+                  
+                        <div class="col-12 mb-3">
+                          <label for="postcode">Postcode <span>*</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="postcode"
+                            id="postcode"
+                            value=""
+                            [ngClass]="{
+                              'is-invalid':
+                              (frmgrpBillingDetails.controls['postcode'].invalid && (frmgrpBillingDetails.controls['postcode'].dirty || frmgrpBillingDetails.controls['postcode'].touched))
+                              || (IsFormValid == false && frmgrpBillingDetails.controls['postcode'].untouched)
+                            }"
+                          />
+                        </div>
+                  
+                        
+                      </div>
+                    
+                  </div>
             </div>
             <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
                 <div class="order-details-confirmation">
                     <app-order-details></app-order-details>
-                    <app-payment-methods></app-payment-methods>
-                    <div class="col-12 mb-4">
-                      <input
-                        type="button"
-                        class="btn karl-checkout-btn"
-                        value="Place Order"
-                        (click)="PlaceOrder()"
-                      />
+                    <div id="accordion" role="tablist" class="mb-4">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingTwo">
+                                <h6 class="mb-0">
+                                  <input type="radio" value="cash on delievery" formControlName="payMethod">  cash on delievery
+                                </h6>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-12 mb-4">
+                        <input
+                          type="submit"
+                          class="btn karl-checkout-btn"
+                          value="Place Order"
+                        />
+                      </div>
                 </div>
             </div>
         </div>
+    </form>
     </div>
 </div>
