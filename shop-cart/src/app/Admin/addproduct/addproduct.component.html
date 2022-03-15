@@ -78,16 +78,6 @@
               </div>
 
               <div class="form-group">
-                <input
-                  type="text"
-                  formControlName="img"
-                  class="form-control"
-                  placeholder="image name"
-                  [ngClass]="{ 'is-invalid': submitted && f.img.errors }"
-                  required
-                />
-              </div>
-              <div class="form-group">
                 <textarea
                   class="form-control"
                   formControlName="description"
@@ -99,6 +89,8 @@
                   }"
                   required
                 ></textarea>
+
+                <input type="hidden" formControlName="img">
               </div>
             </div>
             <div class="modal-footer">
