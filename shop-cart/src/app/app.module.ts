@@ -39,6 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 import { ProductImageComponent } from './Admin/product-image/product-image.component';
 import { OrderSuccessComponent } from './Checkout/order-success/order-success.component';
 @NgModule({
@@ -88,7 +89,7 @@ import { OrderSuccessComponent } from './Checkout/order-success/order-success.co
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [BsDatepickerConfig
+  providers: [BsDatepickerConfig, DatePipe
   ],
   bootstrap: [AppComponent]
 })
