@@ -11,10 +11,9 @@ import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-
   frmgrpBillingDetails!: FormGroup;
   IsFormValid: boolean = true;
 
@@ -24,7 +23,6 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private _cartService: CartServiceService
   ) {}
-
 
   ngOnInit(): void {
     this.frmgrpBillingDetails = this.formBuilder.group({
@@ -62,7 +60,8 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.IsFormValid = true;
 
-      this._cartService.setScope(this.frmgrpBillingDetails.value);
+      this._cartService.UpdateBillingDetails(this.frmgrpBillingDetails.value);
+      this.router.navigate(['orderSuccess']);
     }
   }
 }

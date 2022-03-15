@@ -41,6 +41,7 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 import { ProductImageComponent } from './Admin/product-image/product-image.component';
+import { OrderSuccessComponent } from './Checkout/order-success/order-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +73,7 @@ import { ProductImageComponent } from './Admin/product-image/product-image.compo
     AddproductComponent,
     ListproductComponent,
     ProductImageComponent,
+    OrderSuccessComponent,
 
   ],
   imports: [
