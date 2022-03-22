@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ProductDetailComponent implements OnInit {
 
   baseUrl: string = environment.baseUrl;
-
+  productImgUrl: string =  this.baseUrl + 'assets/img/product-img/';
   productDetail: Product = {} as Product;
 
   productId = 0;

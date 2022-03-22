@@ -65,8 +65,7 @@ export class AddproductComponent implements OnInit {
       img: [
         this.modalService.config.initialState != null
           ? this.modalService.config.initialState['img']
-          : '',
-        Validators.required,
+          : '', 
       ],
     });
 
@@ -95,18 +94,18 @@ export class AddproductComponent implements OnInit {
     }
  
     if (!this.isEdit) {
-      //console.log('add product');
+     
+
+      this.productForm.get('img').setValue();
+      
       this.productService
         .addProduct(this.productForm.value)
         .subscribe((res) => {
-          //console.log(this.productForm.value);
           this.productForm.reset();
           this.bsModalRef.hide();
         });
     } else {
-      //console.log('update product');
-      //console.log(Number(this.modalService.config.initialState!['id']));
-
+      
       this.productService
       .updateProduct(Number(this.modalService.config.initialState!['id']), this.productForm.value)
       .subscribe((res) => {
@@ -122,6 +121,7 @@ export class AddproductComponent implements OnInit {
     this.productForm.reset();
     this.bsModalRef.hide();
   }
+  
   onReset() {
     this.submitted = false;
     this.productForm.reset();

@@ -18,7 +18,7 @@
                 <!-- Product Image -->
                 <div class="product-img">
                   <img
-                    [src]="baseUrl + 'assets/img/product-img/' + product.img"
+                    [src]="product.img != null ? productImgUrl + product.img : productImgUrl + 'default-thumb.png'"
                     [alt]="product.name"
                   />
                   <div class="product-quicview">
@@ -29,9 +29,19 @@
                 </div>
                 <!-- Product Description -->
                 <div class="product-description">
-                  <p style="text-transform: uppercase; font-weight: 400; text-align: center;">{{ product.category }}</p>
-                  <div style="width: 100%;display: inline-block;" >
-                    <h4 class="product-price" style="width: 80%; float: left;">${{ product.price }}</h4>
+                  <p
+                    style="
+                      text-transform: uppercase;
+                      font-weight: 400;
+                      text-align: center;
+                    "
+                  >
+                    {{ product.category }}
+                  </p>
+                  <div style="width: 100%; display: inline-block">
+                    <h4 class="product-price" style="width: 80%; float: left">
+                      ${{ product.price }}
+                    </h4>
                     <p [ngStyle]="getColorStyle(product.color)">&nbsp;</p>
                   </div>
                   <a routerLink="/product-details/{{ product.id }}"
@@ -45,7 +55,6 @@
                     (click)="addToCart(product.id)"
                     >ADD TO CART</a
                   >
-                  
                 </div>
               </div>
             </div>

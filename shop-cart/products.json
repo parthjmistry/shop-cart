@@ -1,16 +1,13 @@
 {
   "products": [
     {
-      "id": 1,
       "name": "The Power of HABIT",
       "description": "The Power of HABIT: Why We Do What We Do in Life and Business. A young woman walks into a laboratory. Over the past two years, she has transformed almost every aspect of her life. She has quit smoking, run a marathon, and been promoted at work. The patterns inside her brain, neurologists discover, have fundamentally changed.",
-      "price": 16.33,
-      "author": "Charles Duhigg",
-      "type": "hardcover",
-      "img": "product-1.jpg",
-      "inCart": false,
-      "category": "business",
-      "color": "red"
+      "price": 16.3,
+      "category": "accessories",
+      "color": "black",
+      "id": 1,
+      "img": "product-6.jpg"
     },
     {
       "id": 2,
@@ -19,7 +16,7 @@
       "price": 8.98,
       "author": "Napoleon Hill",
       "type": "hardcover",
-      "img": "product-2.jpg",
+      "img": "product-11.jpg",
       "inCart": false,
       "category": "business",
       "color": "green"
@@ -115,7 +112,7 @@
       "price": 8.96,
       "author": "Rachel Caine",
       "type": "paperback",
-      "img": "product-3.jpg",
+      "img": "big-image.png",
       "inCart": false,
       "category": "mystery",
       "color": "gray"
@@ -139,28 +136,10 @@
       "price": 25.16,
       "author": "George R. R. Martin",
       "type": "hardcover",
-      "img": "product-9.jpg",
+      "img": "product-7.jpg",
       "inCart": false,
       "category": "accessories",
       "color": "pink"
-    },
-    {
-      "name": "Product 3",
-      "description": "sldflasdfasj tesljtsjdf",
-      "price": 10,
-      "category": "accessories",
-      "color": "blue",
-      "img": "product-3.jpg",
-      "id": 18
-    },
-    {
-      "name": "Product 11",
-      "description": "test description",
-      "price": 100.25,
-      "category": "scifi",
-      "color": "gray",
-      "img": "product-1.jpg",
-      "id": 19
     }
   ]
 }

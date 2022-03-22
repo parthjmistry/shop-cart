@@ -34,7 +34,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { AddproductComponent } from './Admin/addproduct/addproduct.component';
 import { ListproductComponent } from './Admin/listproduct/listproduct.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+ 
  
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -82,8 +82,8 @@ import { OrderSuccessComponent } from './Checkout/order-success/order-success.co
     NgbModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    HttpClientModule,
-    NgxPaginationModule,
+    HttpClientModule, 
+ 
     
     DataTablesModule, 
     BsDatepickerModule.forRoot(),
