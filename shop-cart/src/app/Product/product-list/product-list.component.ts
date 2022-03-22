@@ -13,6 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductListComponent implements OnInit {
   baseUrl: string = environment.baseUrl;
+
+  productImgUrl: string =  this.baseUrl + 'assets/img/product-img/';
+
   productList: Product[] = [];
 
   cartData = (() => {

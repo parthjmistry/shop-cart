@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,9 @@ export class CartServiceService {
   TotalCartItem: number = 0;
 
   scope: [] = [];
+
+  private UserBillingDetails = new BehaviorSubject<any>('service');
+  currentBillingInfo = this.UserBillingDetails.asObservable();
 
   setCartItemCount() {
     this.TotalCartAmt = 0;
@@ -33,11 +36,13 @@ export class CartServiceService {
     this.setCartItemCount();
   }
 
-  getScope() {
-    return this.scope;
-  }
+  /* for Order Details */
+  //UserBillingDetails = new Subject<any>();
 
-  setScope(scope: any){
-      this.scope = scope;
+  
+
+
+  UpdateBillingDetails(BillingDetails: any) {
+    this.UserBillingDetails.next(BillingDetails);
   }
 }

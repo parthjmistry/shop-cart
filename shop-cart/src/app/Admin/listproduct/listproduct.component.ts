@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {  AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 import { Product } from 'src/app/Core/Models/ProductModel';
 import { ProductService } from 'src/app/Core/Services/product.service';
+import { environment } from 'src/environments/environment';
 import { AddproductComponent } from '../addproduct/addproduct.component';
 import { ProductImageComponent } from '../product-image/product-image.component';
 
@@ -12,7 +15,9 @@ import { ProductImageComponent } from '../product-image/product-image.component'
   templateUrl: './listproduct.component.html',
   styleUrls: ['./listproduct.component.css'],
 })
-export class ListproductComponent implements OnInit {
+export class ListproductComponent implements OnDestroy, OnInit {
+  
+  baseUrl: string = environment.baseUrl;
   productList: Product[] = [];
   modalRef: BsModalRef | undefined;
 
@@ -23,35 +28,54 @@ export class ListproductComponent implements OnInit {
   imageForm: FormGroup | any;
 
   dtOptions: DataTables.Settings = {};
+
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement!: DataTableDirective;
   constructor(
     private productService: ProductService,
     private router: Router,
     private modalService: BsModalService
   ) {
   
-    this.getProductList();
+     
   }
 
   ngOnInit(): void {
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 5,
-    //   processing: true, 
-    // };
+    this.dtOptions = {
+      //pagingType: 'full_numbers',
+      //paging: true,
+      pageLength: 5,
+      //search : true,
+      processing: true, 
+      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
+    };
 
-    
+    this.getProductList();
+  }
+  
+
+  
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   getProductList() {
     this.productService.getProductData().subscribe((data) => {
-      this.productList = data;//.sort((a, b) => (a < b ? -1 : 1));
+      this.productList = data.sort((a, b) => (a < b ? -1 : 1));
+
+      this.dtTrigger.next(0);
+      
     });
   }
+
 
   deleteProduct(id: number) {
     if (confirm('are you sure want to delete?')) {
       this.productService.delete(id).subscribe((data) => {
         this.getProductList();
+        
       });
     }
   }
@@ -88,5 +112,14 @@ export class ListproductComponent implements OnInit {
      
 
     this.modalRef.onHidden?.subscribe((data) => this.getProductList());
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next(0);
+    });
   }
 }

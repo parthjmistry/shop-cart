@@ -11,10 +11,10 @@
       </div>
     </div>
 
-    <table class="table">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table productlist">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Img</th>
           <th scope="col">Product Name</th>
           <th scope="col">Price</th>
           <th scope="col">Action</th>
@@ -22,7 +22,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productList">
-          <td>{{ product.id }}</td>
+          <td>
+            <div class="product-pic" >
+              <img [src]="baseUrl + 'assets/img/product-img/' + product.img" [alt]="product.name" />
+            </div>
+          </td>
+          <!-- <td>{{ product.id }}</td> -->
           <td>{{ product.name }}</td>
           <td>${{ product.price }}</td>
 

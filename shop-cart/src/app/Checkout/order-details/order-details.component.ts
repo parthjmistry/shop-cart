@@ -10,7 +10,7 @@ import { CartServiceService } from 'src/app/Cart/Services/cart-service.service';
 export class OrderDetailsComponent implements OnInit {
   CartItems: CartModelNew[] = [];
   CartItemAmount: number = 0;
-  billingDetails: [] = [];
+
   constructor(private cartService: CartServiceService) {}
 
   ngOnInit(): void {
@@ -18,8 +18,5 @@ export class OrderDetailsComponent implements OnInit {
     this.cartService.cartItemAmount.subscribe((itemAmt) => {
       this.CartItemAmount = itemAmt;
     });
-
-    this.billingDetails = this.cartService.getScope();
-    console.log(this.billingDetails);
   }
 }
