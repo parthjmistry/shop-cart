@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'user-list', component: UserListComponent},
+  { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'user-details', component: UserDetailsComponent },
   { path: 'shop', component: ProductListComponent },
   { path: 'product-details/:id', component: ProductDetailComponent },
