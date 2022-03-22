@@ -30,3 +30,17 @@ i {
   display: inline-block;
   margin: 10px 10px;
 }
+.orderdetails{
+  max-width:420px;
+  margin:20px auto 30px;
+}
+.orderdetails th{
+  text-align:right;
+  padding:5px;
+  width:50%;
+}
+.orderdetails td{
+  text-align:left;
+  padding:5px;
+  width:50%;
+}

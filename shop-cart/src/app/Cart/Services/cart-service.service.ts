@@ -12,6 +12,9 @@ export class CartServiceService {
 
   scope: [] = [];
 
+  private UserBillingDetails = new BehaviorSubject<any>('service');
+  currentBillingInfo = this.UserBillingDetails.asObservable();
+
   setCartItemCount() {
     this.TotalCartAmt = 0;
     this.TotalCartItem = 0;
@@ -34,7 +37,10 @@ export class CartServiceService {
   }
 
   /* for Order Details */
-  UserBillingDetails = new Subject<any>();
+  //UserBillingDetails = new Subject<any>();
+
+  
+
 
   UpdateBillingDetails(BillingDetails: any) {
     this.UserBillingDetails.next(BillingDetails);
