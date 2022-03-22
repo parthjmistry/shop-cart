@@ -8,7 +8,7 @@
             <button class="btn btn-primary" (click)="OpenModalAddUser()">Add User</button>
         </div>
     </div>
-    <table datatable [dtOptions]="dtOptions"  class="row-border hover userlist">
+    <table datatable [dtOptions]="dtOptions"  class="row-border hover userlist" *ngIf="userList.length">
         <thead>
             <tr>
                 <th style="width: 8%;" ></th>

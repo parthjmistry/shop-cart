@@ -41,6 +41,8 @@ export class UserListComponent implements OnInit {
     this.dtTrigger.next(0);
     this.getUserList("CompanyUser", "Get");
     
+     
+
   }
   ngAfterViewInit(): void {
     //this.dtTrigger.next();
