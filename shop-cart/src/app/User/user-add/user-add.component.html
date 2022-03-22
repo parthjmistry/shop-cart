@@ -42,6 +42,20 @@
             <div class="form-group">
                 <input type="text" placeholder="Date of Birth" name="DOB" formControlName="DOB" class="form-control" autocomplete="off"  bsDatepicker [bsConfig]="{ isAnimated: true }">
             </div>
+            <div class="from-group">
+                <input type="file" name="ProfilePhoto" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display: none" />
+                <button type="button" class="btn btn-success" (click)="file.click()" > Upload File</button>
+                <span class="upload" *ngIf="progress > 0">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ width: progress + '%' }" aria-valuemin="0" aria-valuemax="100" >
+                        {{ progress }}%
+                      </div>
+                    </div>
+                  </span>
+                  <span class="upload" *ngIf="message">
+                    {{ message }}
+                  </span>
+            </div>
             
         </div>
             <div class="modal-footer">

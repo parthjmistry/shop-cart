@@ -1,4 +1,4 @@
-import { JsonpClientBackend } from '@angular/common/http';
+import { HttpClient, HttpEventType, JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,8 +21,11 @@ export class UserAddComponent implements OnInit {
   datepipe: any;
   listuser : UserViewModel[] = []
   userDetail! : UserViewModel;
-  
-  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService, private _userService : UserService, private router: Router ) {
+  public progress!: number;
+  public message!: string;
+
+
+  constructor(private _bsModalRef : BsModalRef, private fb: FormBuilder, private route : Router, private modalService: BsModalService, private _userService : UserService, private router: Router, private http: HttpClient ) {
     if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
       this.isEditMode = true;
     }
@@ -32,8 +35,6 @@ export class UserAddComponent implements OnInit {
   }
   
 ngOnInit(): void {
-  debugger;
-  
     if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
       this.isEditMode = true;
       
@@ -53,7 +54,8 @@ ngOnInit(): void {
       confPassword : ['', !this.isEditMode ? [Validators.required] : ''],
       Email: [this.modalService.config.initialState != null ? this.modalService.config.initialState['Email'] : '', [Validators.required, Validators.pattern(this.emailPattern)]],
       PhoneNo: [this.modalService.config.initialState != null ? this.modalService.config.initialState['PhoneNo'] : '', Validators.required],
-      DOB: [this.modalService.config.initialState != null ? this.modalService.config.initialState['DOB'] : '', Validators.required]
+      DOB: [this.modalService.config.initialState != null ? this.modalService.config.initialState['DOB'] : '', Validators.required],
+      ProfilePhoto : ''
      }, {
       validator: MustMatch('password', 'confPassword')
   });
@@ -68,7 +70,7 @@ FormSubmit(){
     if (this.userAdd.invalid && this.userExists(this.userAdd.value.Email)) {
         return;
     }
-
+    this.userAdd.value.ProfilePhoto = localStorage.getItem('uploadFile')
     return this._userService.addUser("CompanyUser", "CreateUser", this.userAdd.value).subscribe(
       (res : any) => 
       {
@@ -76,34 +78,6 @@ FormSubmit(){
           this._bsModalRef.hide();
         }
       });
-
-    // if(this.modalService.config.initialState != undefined && this.modalService.config.initialState["UserId"] != undefined){
-      
-    //   this.userId = this.modalService.config.initialState != null ? Number(this.modalService.config.initialState['UserId']) : 0
-    //   this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
-    //   const updatedData = this.updatedArray.map(x => (x.UserId === this.userId ? 
-    //     { 
-    //       UserId : this.userAdd.value.UserId, 
-    //       FirstName : this.userAdd.value.FirstName, 
-    //       LastName : this.userAdd.value.LastName, 
-    //       PhoneNo : this.userAdd.value.PhoneNo, 
-    //       Email : this.userAdd.value.Email, 
-    //       DOB : this.userAdd.value.DOB
-
-    //     } : x));
-    //   localStorage.setItem('userList', JSON.stringify(updatedData))
-    //   this.modalService.config.initialState = undefined;
-    //   this._bsModalRef.hide();
-    //   this.reloadCurrentRoute();  
-    // }
-    // else{
-      
-    //     this.updatedArray = JSON.parse(localStorage.getItem('userList') as string);
-    //     this.updatedArray.push(this.userAdd.value);
-    //     localStorage.setItem('userList', JSON.stringify(this.updatedArray))
-    //     this._bsModalRef.hide();
-    // }    
-    
   }
 
 onCancel(): void {
@@ -132,7 +106,6 @@ userExists(emailId : string) {
   }
 
   getUserById(controller: string, action: string, param : string) {
-    debugger;
     return this._userService.getUserById<UserViewModel>(controller, action, param)
     .subscribe(data => 
       { 
@@ -141,4 +114,30 @@ userExists(emailId : string) {
       }
       );
 }
+
+public uploadFile = (files: any) => {
+  if (files.length === 0) {
+    return;
+  }
+  let filesToUpload: File[] = files;
+  const formData = new FormData();
+
+  Array.from(filesToUpload).map((file, index) => {
+    return formData.append('file' + index, file, file.name);
+  });
+
+  this.http
+    .post('https://angsampleapi.aspen-it.com/CompanyUser/ProfilePhoto', formData, {
+      reportProgress: true,
+      observe: 'events',
+    })
+    .subscribe((event) => {
+      if (event.type === HttpEventType.UploadProgress)
+        this.progress = Math.round((100 * event.loaded) / event.total!);
+      else if (event.type === HttpEventType.Response) {
+        this.message = 'Upload success.';
+         localStorage.setItem('uploadFile', files[0].name);
+      }
+    });
+};
 }

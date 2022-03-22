@@ -16,7 +16,8 @@ export class UserService {
       PhoneNo : '123456789', 
       password: '',
       confPassword: '',
-      DOB: new Date 
+      DOB: new Date,
+      ProfilePhoto : '' 
     },
     { 
       UserId : 2,
@@ -26,7 +27,8 @@ export class UserService {
       PhoneNo : '654987123',
       password: '',
       confPassword: '', 
-      DOB: new Date 
+      DOB: new Date,
+      ProfilePhoto : '' 
     },
     { 
       UserId : 3,
@@ -36,7 +38,8 @@ export class UserService {
       PhoneNo : '321654987',
       password: '',
       confPassword: '', 
-      DOB: new Date 
+      DOB: new Date,
+      ProfilePhoto : '' 
     },
     { 
       UserId : 4,
@@ -46,7 +49,8 @@ export class UserService {
       PhoneNo : '987654321',
       password: '',
       confPassword: '', 
-      DOB: new Date 
+      DOB: new Date,
+      ProfilePhoto : '' 
     },
     { 
       UserId : 5,
@@ -56,7 +60,8 @@ export class UserService {
       PhoneNo : '258369147',
       password: '',
       confPassword: '', 
-      DOB: new Date 
+      DOB: new Date ,
+      ProfilePhoto : ''
     },
     { 
       UserId : 6,
@@ -66,7 +71,8 @@ export class UserService {
       PhoneNo : '369258369',
       password: '',
       confPassword: '', 
-      DOB: new Date 
+      DOB: new Date ,
+      ProfilePhoto : ''
     },
   ];
   constructor(private http : HttpWrapService) { }
@@ -89,5 +95,8 @@ getUserList<T>(controller : string, action : string) : Observable<T> {
 
 getUserById<T>(controller : string, action : string, param : string) : Observable<T> {
   return this.http.getById<T>(controller, action, param)
+}
+delete(controller : string, action : string, param : string){
+  return this.http.delete(controller, action, param)
 }
 }

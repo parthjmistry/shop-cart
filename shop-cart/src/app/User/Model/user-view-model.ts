@@ -6,7 +6,8 @@ export interface UserViewModel {
     PhoneNo : string,
     password: string,
     confPassword: string,
-    DOB : Date
+    DOB : Date,
+    ProfilePhoto : string
 }
 export class User
 {
@@ -15,7 +16,8 @@ export class User
     LastName : string = '';
     Email : string = '';
     PhoneNo : string = '';
-    DOB : Date = new Date()
+    DOB : Date = new Date();
+    ProfilePhoto : string = "";
 }
 export class DataTablesResponse {
     data?: any[];

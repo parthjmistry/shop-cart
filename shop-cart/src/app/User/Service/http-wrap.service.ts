@@ -32,5 +32,8 @@ export class HttpWrapService {
 getById<T>(controller: string, action: string, params : string): Observable<T> {
   return this._http.get<T>(this.apiUrl + controller + '/'+ action + '/' + params, this.httpOptions);
 }
+delete(controller: string, action: string, params : string) {
+  return this._http.delete(this.apiUrl + controller + '/'+ action + '/' + params, this.httpOptions);
+}
 
 }
